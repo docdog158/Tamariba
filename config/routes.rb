@@ -26,10 +26,15 @@ Rails.application.routes.draw do
     patch 'customers/information', to: 'customers#update'
     get 'customers/unsubscribe', to: 'customers#unsubscribe'
     patch 'customers/withdraw', to: 'customers#withdraw'
+    
+    #フォロー機能
+    resource :relationships, only: [:create, :destroy]
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
+      
     resources :posts do
-
-    resources :comments, only: [:create, :destroy]
-    resource :favorite, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
     end
   end
 

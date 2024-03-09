@@ -1,0 +1,123 @@
+<header class="sticky-top">
+  <nav class="navbar navbar-expand-lg background-color">
+    <div class="container-fluid">
+      <%= link_to root_path,class: 'navbar-brand offset-md-1' do %>
+        home
+        <%#= image_tag "nagano_header.png" %>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="mt-3 col-md-2">
+        <% if customer_signed_in? %>
+          <p class="text-white">ようこそ<%= current_customer.last_name %>さん！</p>
+        <% end %>
+      </div>
+      <div id="navbarNavDropdown col">
+        <ul class="navbar-nav ml-auto">
+        <% if admin_signed_in? %>
+          <li>
+            <%= link_to admin_items_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-cake-candles"></i>Items
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to admin_customers_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-users"></i>Customers
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to admin_root_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-cart-shopping"></i>Orders
+            <% end %>
+          </li>
+          <li>
+            <%= link_to admin_genres_path ,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-list"></i>Genres
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_admin_session_path,method: :delete, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+            <% end %>
+          </li>
+          <% if controller_name != 'sessions' %>
+          <div class="search_form p-3">
+            <%= search_form_for @q, url: admin_search_path, class:"d-flex" do |f| %>
+            <div class="col-md-9 p-0">
+              <%= f.search_field :name_cont, class:"form-control", placeholder: 'Search' %>
+            </div>
+            <div class="col-md-1 p-0">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+        <% elsif customer_signed_in? %>
+          <li>
+            <%= link_to customers_my_page_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-user"></i>My page
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to posts_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-cake-candles"></i>Posts
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_customer_session_path, method: :delete,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+            <% end %>
+          </li>
+          <% if controller_name != 'sessions' %>
+          <div class="search_form p-3">
+            <%= search_form_for @q, url: search_path, class:"d-flex" do |f| %>
+            <div class="col-md-9 p-0">
+              <%= f.search_field :name_cont, class:"form-control", placeholder: 'Search' %>
+            </div>
+            <div class="col-md-1 p-0">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+        <% else %>
+          <li>
+            <%=  link_to posts_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-cake-candles"></i>Posts
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to new_customer_registration_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-user-plus"></i>Sign Up
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_customer_session_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>Log In
+            <% end %>
+          </li>
+          <%# if controller_name != 'sessions' %
+          <div class="search_form p-3">
+            <%= search_form_for @q, url: search_path, class:"d-flex" do |f| %
+            <div class="col-md-9 p-0">
+              <%= f.search_field :name_cont, class:"form-control", placeholder: 'Search' %
+            </div>
+            <div class="col-md-1 p-0">
+              <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <% end %
+          </div
+          <% end %>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
