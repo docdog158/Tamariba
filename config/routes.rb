@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root :to => 'homes#top'
-    get "search" => "searches#search"
+    #get "search" => "searches#search"
     get 'customers/my_page', to: 'customers#show'
     get 'customers/information/edit', to: 'customers#edit'
     patch 'customers/information', to: 'customers#update'
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
       
-    resources :posts do
+    resources :post_pets do
       resources :comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
     end
