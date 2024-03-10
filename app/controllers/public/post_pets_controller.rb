@@ -7,21 +7,24 @@ class Public::PostPetsController < ApplicationController
   end
   
   def show
-    @post_pet = Post.find(params[:id])
+    @post_pet = PostPet.find(params[:id])
     @customer = @post_pet.customer
-    @comment = Comment.new
+    #@comment = Comment.new
   end
   
   def index
-    @posts = Post_pet.all
+    @post_pets = Post_pet.all
   end
   
   def create
-    @post_pet = Post_pet.new(post_params)
-    @post_pet.customer_id = current_customer.id
-    @post_petimage.save
-    redirect_to post_pet_path
+    @post_pet = current_customer.post_pets.build(post_pet_params)
+    if @post_pet.save
+      redirect_to post_pet_path(@post_pet)
+    else
+      render 'new'
+    end
   end
+  
   
   def destroy
     
@@ -36,8 +39,9 @@ class Public::PostPetsController < ApplicationController
   end
   
   private
-  def post_params
-    params.require(:post_pet).permit(:title, :introduction, :image)
+  
+  def post_pet_params
+    params.require(:post_pet).permit(:title, :content, :image)
   end
   
 end

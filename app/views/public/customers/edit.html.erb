@@ -1,0 +1,37 @@
+<%= form_with model: @customer, url: customers_information_path, local: true do |f| %>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <%#= render 'layouts/errors', obj: @customer %>
+          <div class="card-header text-center">
+            <h3>会員情報編集</h3>
+          </div>
+          <div class="card-body">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>名前</th>
+                  <td>
+                    <%= f.text_field :name, autofocus: true, autocomplete: "last_name", class: "form-control mb-2" %>
+                  </td>
+                </tr>
+                <tr>
+                  <th>紹介文</th>
+                  <td>
+                    <%= f.text_field :introduction, autofocus: true, autocomplete: "知ってもらいたいことを書くところです", class: "form-control" %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <%= f.submit "編集内容を保存", class:" mr-5 btn btn-success" %>
+              <%= link_to "退会する", customers_unsubscribe_path, class:"ml-5 btn btn-sm btn-danger" %>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

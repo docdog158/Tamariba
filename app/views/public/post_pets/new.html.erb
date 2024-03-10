@@ -3,7 +3,7 @@
     <h3>投稿する</h3>
       <div class="mx-auto">
 
-        <%= form_with model:@post_pets, local: true do |f| %>
+        <%= form_with model:@post_pet , url: post_pets_path ,local: true do |f| %>
 
         <div class="form-group row">
           <%= f.label :image, '商品画像', class: 'col-sm-3 col-form-label' %>
@@ -12,18 +12,17 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :taile, '題名', class: 'col-sm-3 col-form-label' %>
+          <%= f.label :title, '題名', class: 'col-sm-3 col-form-label' %>
           <div class="col-sm-9">
-            <%= f.text_field :taile, placeholder:"ここに題名を記述します", class: 'form-control' %>
+            <%= f.text_field :title, placeholder:"ここに題名を記述します", class: 'form-control' %>
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :introductionname, '紹介文', class: 'col-sm-3 col-form-label' %>
+          <%= f.label :content, '紹介文', class: 'col-sm-3 col-form-label' %>
           <div class="col-sm-9">
-            <%= f.text_field :introductionname, placeholder:"ここに紹介文を記述します", class: 'form-control' %>
+            <%= f.rich_text_area :content, placeholder:"ここに紹介文を記述します", class: 'form-control' %>
           </div>
         </div>
-
         <div class="form-group row">
           <div class="col-sm-9 ">
             <%= f.submit '新規登録', class: 'btn btn-success' %>

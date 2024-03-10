@@ -1,5 +1,8 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  def index
+    @customers = Customer.page(params[:page]).per(10)
+  end
   def show
     @customer = current_customer
   end
@@ -9,7 +12,7 @@ class Public::CustomersController < ApplicationController
   end
   
   def update
-    @cusromer = Customer.find(current_customer.id)
+    @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
       redirect_to customers_my_page_path
     else

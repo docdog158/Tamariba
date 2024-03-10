@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col text-center mt-5">
+      <h1 class="">本当に退会しますか？</h1>
+
+      <p>
+        退会すると、会員登録情報や<br>
+        ここでの投稿や、会話が消えるなります。<br>
+        退会する場合は、「退会する」をクリックしてください。
+      </p>
+
+      <div class="my-5">
+        <%= form_with model: @customer, url: customers_withdraw_path, method: :patch,  local: true do |f| %>
+          <%= link_to "退会しない", customers_my_page_path, class:"mr-5 btn btn-primary" %>
+          <%= f.submit "退会する", class:"ml-5 btn btn-danger" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
