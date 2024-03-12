@@ -21,17 +21,17 @@ Rails.application.routes.draw do
   scope module: :public do
     root :to => 'homes#top'
     #get "search" => "searches#search"
-    get 'customers/my_page', to: 'customers#show'
-    get 'customers/information/edit', to: 'customers#edit'
-    patch 'customers/information', to: 'customers#update'
+    #get 'customers/my_page', to: 'customers#show'
+    #get 'customers/information/edit', to: 'customers#edit'
+    #patch 'customers/information', to: 'customers#update'
     get 'customers/unsubscribe', to: 'customers#unsubscribe'
     patch 'customers/withdraw', to: 'customers#withdraw'
-    
+    resources :customers,only: [:show, :edit, :update]do
     #フォロー機能
-    resource :relationships, only: [:create, :destroy]
+      resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
-      
+    end 
     resources :post_pets do
       resources :comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]

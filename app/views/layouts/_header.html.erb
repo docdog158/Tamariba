@@ -52,7 +52,7 @@
           <% end %>
         <% elsif customer_signed_in? %>
           <li>
-            <%= link_to customers_my_page_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+            <%= link_to customer_path(current_customer),class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
               <i class="fa-solid fa-user"></i>My page
             <% end %>
           </li>

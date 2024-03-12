@@ -4,11 +4,11 @@ class Public::CustomersController < ApplicationController
     @customers = Customer.page(params[:page]).per(10)
   end
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
   end
   
   def edit
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
   end
   
   def update
