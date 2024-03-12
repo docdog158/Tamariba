@@ -4,6 +4,7 @@ class PostPet < ApplicationRecord
   has_many :comments,dependent: :destroy
   #Action_Text
   has_rich_text :content
+  validates :content, presence: true
   
   validates :title,presence:true
   has_one_attached :image

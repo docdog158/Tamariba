@@ -13,7 +13,7 @@ class Public::PostPetsController < ApplicationController
   end
   
   def index
-    @post_pets = Post_pet.all
+    @post_pets = PostPet.all
   end
   
   def create

@@ -1,1 +1,15 @@
 @use '~bootstrap/scss/bootstrap';
+header {
+  height: 15vh;
+  background-color: #5a4d43;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  opacity: 95%;
+  font-family: 'Sawarabi Mincho', sans-serif;
+}
+
+body {
+  background-color: #f5f1ee;
+}
