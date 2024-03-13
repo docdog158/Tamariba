@@ -9,7 +9,7 @@ class Public::PostPetsController < ApplicationController
   def show
     @post_pet = PostPet.find(params[:id])
     @customer = @post_pet.customer
-    #@comment = Comment.new
+    @post_comment = PostComment.new
   end
   
   def index
@@ -27,7 +27,9 @@ class Public::PostPetsController < ApplicationController
   
   
   def destroy
-    
+    @post_pet = PostPet.find(params[:id])
+    @post_pet.destroy
+    redirect_to post_pets_path
   end
   
   def update

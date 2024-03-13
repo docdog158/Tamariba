@@ -1,7 +1,7 @@
 class PostPet < ApplicationRecord
   belongs_to :customer,dependent: :destroy
   has_many :favorites,dependent: :destroy
-  has_many :comments,dependent: :destroy
+  has_many :post_comments,dependent: :destroy
   #Action_Text
   has_rich_text :content
   validates :content, presence: true

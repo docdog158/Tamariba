@@ -1,0 +1,11 @@
+<% if post_pet.favorited_by?(current_customer) %>
+  <%= link_to post_pet_favorite_path(post_pet_id: post_pet.id), class: "text-danger", method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= post_pet.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to post_pet_favorite_path(post_pet_id: post_pet.id), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= post_pet.favorites.count %>
+  <% end %>
+<% end %>

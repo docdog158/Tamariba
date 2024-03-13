@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       get "followers" => "relationships#followers", as: "followers"
     end 
     resources :post_pets do
-      resources :comments, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
     end
   end
