@@ -10,8 +10,8 @@
 
         <thead>
           <tr>
-            <th>Title</th>
             <th>User</th>
+            <th>Title</th>
             <th>Content</th>
             <th colspan="3"></th>
           </tr>
@@ -20,21 +20,23 @@
         <% @post_pets.each do |post_pet| %>
         <tbody>
           <tr>
+            
+            <td>
+              <%= link_to customer_path(post_pet.customer) do %>
+                <%= image_tag post_pet.customer.get_profile_image, size:"100x100" %>
+                <%= post_pet.customer.name %>
+              <% end %>
+            </td>
+            
             <td>
               <%= link_to post_pet_path(post_pet.id) do %>
                 <%= post_pet.title %>
               <% end %>
             </td>
-
             <td>
-              <%= link_to customers_my_page_path(post_pet.customer) do %>
-                <%= image_tag post_pet.customer.get_profile_image(100,100) %>
-                <%= post_pet.customer.name %>
+              <%= link_to post_pet_path(post_pet.id) do %>
+                <%= post_pet.content %>
               <% end %>
-            </td>
-
-            <td>
-              <%= post_pet.content %>
             </td>
 
           </tr>
