@@ -2,6 +2,7 @@
 header {
   height: 15vh;
   background-color: #5a4d43;
+  background: url(path/to/pattern_camo1.jpg);
   position: absolute;
   top: 0;
   z-index: 10;
@@ -22,3 +23,6 @@ footer{
   opacity: 95%;
   bottom: 0;
 }
+
+//background: url(<%= asset_path 'pattern_camo1.jpg' %>);
+//background-image: url(<%= asset_path 'pattern_camo1.jpg' %>);
