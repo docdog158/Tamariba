@@ -37,5 +37,18 @@ class PostPet < ApplicationRecord
     .per(per_page) # 6. ページごとのデータ数を指定
   end
   
+  def self.looks(search, word)
+    if search == "partial_match"
+      @post_pet = PostPet.where("title LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post_pet = PostPet.where("title LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post_pet = PostPet.where("title LIKE?","%#{word}")
+    elsif search == "perfect_match"
+      @post_pet = PostPet.where("title LIKE?","%#{word}%")
+    else
+      @post_pet = PostPet.all
+    end
+  end
   
 end

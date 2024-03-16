@@ -1,8 +1,9 @@
 @use '~bootstrap/scss/bootstrap';
 header {
   height: 15vh;
-  background-color: #5a4d43;
-  //background-image: image-url("image_top.jpg");
+  //background-color: #5a4d43;
+ 
+ // background-image: image-url("no_image.jpg");
   position: absolute;
   top: 0;
   z-index: 10;
@@ -12,15 +13,17 @@ header {
 }
 
 body {
-  background-color: #f5f1ee;
+  background-color: rgba(255, 255, 128, .5);
+  // background-image: image-url("no_image.jpg");
 }
 
 footer{
-  position: absolute;
+  //position: absolute;
   width: 100%;
-  height: 80px;
+  padding: 50px;
+  //height: 80px;
   background-color: #5a4d43;
   opacity: 95%;
-  bottom: 0;
+  //bottom: 0;
 }
 

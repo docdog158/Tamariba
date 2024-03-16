@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <table class='table'>
+        <tr><%= image_tag @customer.get_profile_image, size:'100x100' %></tr>
+        <tr>
+      	  <th>name</th>
+      	  <th><%= @customer.name %></th>
+        </tr>
+        <tr>
+      	  <th>introduction</th>
+      	  <th><%= @customer.introduction %></th>
+        </tr>
+
+        <tr>
+          <th>follows</th>
+          <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %></th>
+        </tr>
+        <tr>
+          <th>followers</th>
+          <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %></th>
+        </tr>
+
+
+      </table>
+      <%# guest user %>
+      <%# unless customer.guest_user? %>
+      <li><%= link_to liked_posts_customer_path(current_customer), data: { "turbolinks" => false } do %><i class="fas fa-thumbs-up"></i>いいね一覧<% end %></li>
+      <%= render 'follow', customer: @customer %>
+    </div>
+  </div>
+</div>

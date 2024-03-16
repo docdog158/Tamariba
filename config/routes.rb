@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     get 'customers/unsubscribe', to: 'customers#unsubscribe'
     patch 'customers/withdraw', to: 'customers#withdraw'
-    resources :customers,only: [:show, :edit, :update]do
+    resources :customers,only: [:show, :edit, :update, :index]do
     #フォロー機能
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"

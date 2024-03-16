@@ -44,4 +44,18 @@ class Customer < ApplicationRecord
     followings.include?(customer)
   end
   
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "partial_match"
+      @customer = Customer.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @customer = Customer.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @customer = Customer.where("name LIKE?","%#{word}")
+    elsif search == "perfect_match"
+      @customer = Customer.where("name LIKE?","%#{word}%")
+    else
+      @customer = Customer.all
+    end
+  end
 end

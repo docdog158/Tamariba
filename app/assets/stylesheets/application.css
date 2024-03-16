@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+header {
+  height: 15vh;
+  background-image: url("pattern_camo1.jpg");
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  opacity: 95%;
+  font-family: 'Sawarabi Mincho', sans-serif;
+}
