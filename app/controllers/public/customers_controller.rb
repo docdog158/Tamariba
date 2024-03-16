@@ -5,13 +5,13 @@ class Public::CustomersController < ApplicationController
   end
   def show
     @customer = Customer.find(params[:id])
-    
+
   end
-  
+
   def edit
     @customer = Customer.find(params[:id])
   end
-  
+
   def update
     @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
@@ -19,6 +19,10 @@ class Public::CustomersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def liked_posts
+    @liked_posts = PostPet.liked_posts(current_customer, params[:page], 12)
   end
 
   def unsubscribe

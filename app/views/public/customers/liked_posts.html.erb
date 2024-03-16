@@ -1,26 +1,20 @@
-<div class="container px-5 px-sm-0">
+<div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <%#= render 'books/new', book: @book ,user: @user %>
-    </div>
-
-    <div class="col">
-      <h2>Posts</h2>
-      <table class="table table-hover table-inverse">
-
+    <div class="col-md-12">
+      <h4 class="headline mt-5 ml-5">いいねした投稿</h4>
+        <div class="row mt-3">
+        <table class="table table-hover table-inverse">
+  
         <thead>
           <tr>
             <th>User</th>
             <th>Title</th>
-            <th>Content</th>
+            <th>Content</th>  
             <th colspan="3"></th>
           </tr>
         </thead>
-
-        <% @post_pets.each do |post_pet| %>
-        <tbody>
-          <tr>
-
+        <% @liked_posts.each do |post_pet| %>
+          
             <td>
               <%= link_to customer_path(post_pet.customer) do %>
                 <%= image_tag post_pet.customer.get_profile_image, size:"100x100" %>
@@ -45,6 +39,5 @@
 
       </table>
     </div>
-
   </div>
 </div>

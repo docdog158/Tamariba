@@ -42,6 +42,8 @@ class Public::PostPetsController < ApplicationController
   
   private
   
+  
+  
   def post_pet_params
     params.require(:post_pet).permit(:title, :content, :image)
   end

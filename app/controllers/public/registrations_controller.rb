@@ -4,7 +4,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, if: :devise_controller?
   
   def after_sign_up_path_for(resource)
-    customer_path
+    root_path
   end
   
   def after_sign_out_path_for(resource)
