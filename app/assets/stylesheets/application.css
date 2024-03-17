@@ -27,7 +27,7 @@ header {
 }
 main {
   background-color: rgba(255, 255, 128, .5);
-  height: 75vh;
+  min-height: 75vh;
 }
 
 footer{
@@ -35,4 +35,14 @@ footer{
   height: 10vh;
   width: 100%;
   background-color: #5a4d43;
+}
+
+
+.card-body__favorite-position {
+  position: relative;
+}
+.card-body__favorite-position > a {
+  position: absolute;
+  top: 60%;
+  right: 30%;
 }
