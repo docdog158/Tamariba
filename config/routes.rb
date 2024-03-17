@@ -20,10 +20,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root :to => 'homes#top'
-    #get "search" => "searches#search"
-    #get 'customers/my_page', to: 'customers#show'
-    #get 'customers/information/edit', to: 'customers#edit'
-    #patch 'customers/information', to: 'customers#update'
+    get "search" => "searches#search"
     get 'customers/unsubscribe', to: 'customers#unsubscribe'
     patch 'customers/withdraw', to: 'customers#withdraw'
     resources :customers,only: [:show, :edit, :update]do

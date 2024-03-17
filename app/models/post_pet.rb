@@ -20,4 +20,19 @@ class PostPet < ApplicationRecord
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end
+  
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
+    elsif search == "forward_match"
+      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
+    elsif search == "backward_match"
+      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
+    elsif search == "partial_match"
+      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
+    else
+      @post_pet = PostPet.all
+    end
+  end
+  
 end
