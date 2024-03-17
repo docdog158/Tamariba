@@ -1,5 +1,32 @@
-<div class="container mt-4">
+<div class="container">
   <div class="row justify-content-center">
+    
+    <div class="col-md-3">
+      <table class='table'>
+        <tr><%= image_tag @customer.get_profile_image, size:'100x100' %></tr>
+        <tr>
+      	  <th>name</th>
+      	  <th><%= @customer.name %></th>
+        </tr>
+        <tr>
+      	  <th>introduction</th>
+      	  <th><%= @customer.introduction %></th>
+        </tr>
+
+        <tr>
+          <th>follows</th>
+          <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %></th>
+        </tr>
+        <tr>
+          <th>followers</th>
+          <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %></th>
+        </tr>
+
+
+      </table>
+      <%= render 'follow', cust: @customer %>
+    </div>
+    
     <div class="col-md-8">
       <table class='table'>
         <tr><%= image_tag @customer.get_profile_image, size:'100x100' %></tr>
@@ -11,7 +38,7 @@
       	  <th>introduction</th>
       	  <th><%= @customer.introduction %></th>
         </tr>
-        
+
         <tr>
           <th>follows</th>
           <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %></th>
@@ -20,8 +47,8 @@
           <th>followers</th>
           <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %></th>
         </tr>
-        
-        
+
+
       </table>
       <%= render 'follow', cust: @customer %>
     </div>

@@ -15,12 +15,14 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
     end
     get "search" => "searches#search"
+    get "search_tag" => "post_workouts#search_tag"
   end
 
 
   scope module: :public do
     root :to => 'homes#top'
     get "search" => "searches#search"
+    get "search_tag" => "post_pets#search_tag", as: "search_tag"
     get 'customers/unsubscribe', to: 'customers#unsubscribe'
     patch 'customers/withdraw', to: 'customers#withdraw'
     resources :customers,only: [:show, :edit, :update]do
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
     resources :post_pets do
       resources :post_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
+    
     end
   end
 

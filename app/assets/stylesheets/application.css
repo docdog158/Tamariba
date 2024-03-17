@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background-color: rgba(255, 255, 128, .5);
+}
 header {
   height: 15vh;
   background-image: url("pattern_camo1.jpg");
@@ -22,4 +25,14 @@ header {
   width: 100%;
   font-family: 'Sawarabi Mincho', sans-serif;
 }
+main {
+  background-color: rgba(255, 255, 128, .5);
+  height: 75vh;
+}
 
+footer{
+  text-align: justify;
+  height: 10vh;
+  width: 100%;
+  background-color: #5a4d43;
+}
