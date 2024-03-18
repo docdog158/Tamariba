@@ -6,8 +6,12 @@ class PostPet < ApplicationRecord
   has_rich_text :content
   validates :content, presence: true
   
-  validates :title,presence:true
+  validates :title,presence:true,
+    length: { minimum: 2, maximum: 30 }
+  
   has_one_attached :image
+  validates :image,presence:true
+  
   
   def get_image
     unless image.attached?

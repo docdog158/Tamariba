@@ -2,41 +2,38 @@
   <div class="row">
     <div class="col">
       <h2>Posts</h2>
-      
+
         <% @tag_list.each do |list|%>
           <i class="fa-sharp fa-solid fa-tag"></i>
           <%=link_to list.name, search_tag_path(tag_id: list.id) %>
           <%="(#{list.post_pets.count})" %>
         <% end %>
-        
+
         <div class='d-flex flex-wrap offset-md-1 col-md-7 row'>
           <% @post_pets.each do |post_pet| %>
             <div class="d-flex flex-wrap col-md-6">
               <div class="card m-4 w-100" style="">
                 <div class="card-body text-center">
+                  
                   <div class="card-title">
                     <%= link_to post_pet_path(post_pet.id) do %>
                       <%= post_pet.title %>
                     <% end %>
                   </div>
+                  
+                  <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
+                    <%= image_tag post_pet.image, size: "200x180" %>
+                    <%= render "favorites/btn", post_pet: post_pet %>
+                  </div>
+                  
+                  <div>
+                    <% strip_tags(post_pet.content.to_s).gsub(/[\n]/,"").strip.truncate(20) %>
+                  </div>
+                  
                   <div>
                     <%= link_to customer_path(post_pet.customer) do %>
-                      <%= image_tag post_pet.customer.get_profile_image, size:"100x100" %>
-                    <% end %>
-                  </div>
-                  <div>
-                    <%= post_pet.customer.name %>
-                  </div>
-                  <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
-                    <%= image_tag post_pet.customer.get_profile_image, size:"100x100" %>
-                    
-                    <%= render "favorites/btn", post_pet: post_pet %>
-                    
-                    
-                  </div>
-                  <div>
-                    <%= link_to post_pet_path(post_pet.id) do %>
-                      <%= post_pet.content %>
+                      <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
+                      <%= post_pet.customer.name %>
                     <% end %>
                   </div>
                 </div>

@@ -43,6 +43,6 @@ footer{
 }
 .card-body__favorite-position > a {
   position: absolute;
-  top: 60%;
-  right: 30%;
+  top: 70%;
+  right: 20%;
 }
