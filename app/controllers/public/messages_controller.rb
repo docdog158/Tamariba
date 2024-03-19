@@ -3,7 +3,7 @@ class Public::MessagesController < ApplicationController
     if Entry.where(customer_id: current_customer.id, room_id: params[:message][:room_id]).present?
       @message = Message.new(message_params)
       @message.customer_id = current_customer.id
-      @message.save
+      @message.save!
     else
       flash[:alert] = "メッセージ送信に失敗しました。"
     end

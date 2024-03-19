@@ -1,28 +1,28 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     
-    <div class='col-md-3'>
+    <div class='col-md-3 mt-3'>
       <table class='table'>
         <tr><%= image_tag @customer.get_profile_image, size:'100x100' %></tr>
         <tr>
-          <th>name</th>
       	  <th><%= @customer.name %></th>
         </tr>
         <tr>
       	  <th><%= @customer.introduction %></th>
         </tr>
-
-        <tr>
-          <th>フォロー中</th>
-          <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %>フォロー</th>
-        </tr>
-        <tr>
-          <th>フォロワー</th>
-          <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %>フォロワー</th>
-        </tr>
-
-
       </table>
+      <table>
+        <tr>
+          <th>フォロー中　　　　・</th>
+          <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %><small>フォロー</small></th>
+        </tr>
+        <tr>
+          <th>フォロワー　　　　・</th>
+          <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %><small>フォロワー</small></th>
+        </tr>
+      </table>
+      
+      
       <div><%= link_to liked_posts_customer_path(@customer), data: { "turbolinks" => false } ,class: "btn btn-info text-light m-2 mt-2" do %>
         <i class="fas fa-thumbs-up"></i>いいねした投稿<% end %>
       </div>
@@ -51,7 +51,7 @@
     
     
     
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-md-8 mt-3 offset-md-1'>
       <h2><%= @customer.name %>の投稿一覧</h2>
       <div class='d-flex flex-wrap'>
         <% @post_pets.each do |post_pet| %>
