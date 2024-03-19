@@ -1,16 +1,10 @@
-<div class="container px-5 px-sm-0">
+<div class="container">
   <div class="row">
-    <div class="col">
-      <h2>投稿一覧</h2>
-
-        <% @tag_list.each do |list|%>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-          <%=link_to list.name, search_tag_path(tag_id: list.id) %>
-          <%="(#{list.post_pets.count})" %>
-        <% end %>
-
+    <div class="col-md-12">
+      <h4 class="headline mt-5 ml-5">いいねした投稿</h4>
         <div class='d-flex flex-wrap offset-md-1 col-md-7 row'>
-          <% @post_pets.each do |post_pet| %>
+          
+          <% @liked_posts.each do |post_pet| %>
             <div class="d-flex flex-wrap col-md-6">
               <div class="card m-4 w-100" style="">
                 <div class="card-body text-center">
@@ -36,12 +30,15 @@
                       <%= post_pet.customer.name %>
                     <% end %>
                   </div>
+                  
                 </div>
               </div>
             </div>
           <% end %>
         </div>
       </div>
+    <div class="d-flex justify-content-center">
+      <%= paginate @liked_posts, theme: 'bootstrap-5' %>
     </div>
   </div>
 </div>

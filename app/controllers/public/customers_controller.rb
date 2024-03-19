@@ -6,7 +6,28 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @post_pets = @customer.post_pets
+    #チャット機能
+    @currentCustomerEntry = Entry.where(customer_id: current_customer.id)
+    @customerEntry = Entry.where(customer_id: @customer.id)
+    unless @customer.id == current_customer.id
+      @currentCustomerEntry.each do |cu| 
+        @customerEntry.each do |u| 
+          if cu.room_id == u.room_id 
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+      if @isRoom
+      else
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
   end
+  
+
+
   
   def edit
     @customer = Customer.find(params[:id])
@@ -19,6 +40,11 @@ class Public::CustomersController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def liked_posts
+    @customer = Customer.find(params[:id])
+    @liked_posts = PostPet.liked_posts(@customer, params[:page], 12)
   end
 
   def unsubscribe

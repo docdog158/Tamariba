@@ -1,0 +1,2 @@
+module Publc::RoomsHelper
+end

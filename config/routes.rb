@@ -30,7 +30,15 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
+      member do
+        get :liked_posts
+      end
+      
     end 
+    
+    resources :messages, only: [:create]
+    resources :rooms, only: [:create, :show]
+    
     resources :post_pets do
       resources :post_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
