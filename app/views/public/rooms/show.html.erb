@@ -1,42 +1,45 @@
 <div class="container">
-  <div class="left-button mt-3">
-    <%= link_to "ユーザー一覧に戻る", customers_path, class:"btn btn-info" %>
-  </div>
-
-  <% @entries.each do |e| %>
-    <% unless e.customer == current_customer %>
-    <h2><%= e.customer.name %>さんとのチャットルーム</h2>
-    <% end %>
-  <% end %>
-
-  <hr>
-  <div class="chat">
-    <div class="chats">
-      <% if @messages.present? %>
-        <% @messages.each do |m| %>
-          <% if m.customer_id == current_customer.id %>
-              <div class="chat-fukidashi" style="text-align: right;">
-                <strong><%= m.content %></strong>
-              </div>
-          <% else %>
-              <div class="chat-fukidashi" style="text-align: left;">
-                <strong><%= m.content %></strong>
-              </div>
-          <% end %>
+  <div class="row">
+    <div clsss="col mt-3">
+      <div class="left-button">
+        <%= link_to "ユーザー一覧に戻る", customer_path, class:"btn btn-info" %>
+      </div>
+    
+      <% @entries.each do |e| %>
+        <% unless e.customer == current_customer %>
+        <h2><%= e.customer.name %>さんとのチャットルーム</h2>
         <% end %>
       <% end %>
-    </div>
-
-    <div class="errors">
-      <%= render "/layouts/errors", obj: @message %>
-    </div>
-
-    <div class="posts">
-      <%= form_with model: @message, local: false do |f| %>
-        <%= f.text_field :content, placeholder: "140字以内でメッセージを入力してください", size: 70, class: "form-text-field" %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-        <%= f.submit "投稿", class: "form-submit" %>
-      <% end %>
+    
+      <div class="chat">
+        <div class="chats">
+          <% if @messages.present? %>
+            <% @messages.each do |m| %>
+              <% if m.customer_id == current_customer.id %>
+                  <div class="chat-fukidashi" style="text-align: right;">
+                    <strong><%= m.content %></strong>
+                  </div>
+              <% else %>
+                  <div class="chat-fukidashi" style="text-align: left;">
+                    <strong><%= m.content %></strong>
+                  </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+    
+        <div class="errors">
+          <%= render "/layouts/errors", obj: @message %>
+        </div>
+    
+        <div class="posts">
+          <%= form_with model: @message, local: false do |f| %>
+            <%= f.text_field :content, placeholder: "140字以内でメッセージを入力してください", size: 70, class: "form-text-field" %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+            <%= f.submit "投稿", class: "form-submit" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

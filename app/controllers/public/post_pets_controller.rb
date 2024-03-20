@@ -5,7 +5,6 @@ class Public::PostPetsController < ApplicationController
 
   def edit
     @post_pet = PostPet.find(params[:id])
-    @tag_list = params[:post_pet][:name].split(',')
 
   end
 
@@ -42,12 +41,13 @@ class Public::PostPetsController < ApplicationController
   def destroy
     @post_pet = PostPet.find(params[:id])
     @post_pet.destroy
-    redirect_to post_pets_path
+    redirect_to customer_path
   end
 
   def update
-    if @post_pet.update(post_params)
-      redirect_to post_path(@post_pet)
+    @post_pet = PostPet.find(params[:id])
+    if @post_pet.update(post_pet_params)
+      redirect_to post_pet_path(@post_pet), notice:'投稿を編集しました'
     else
       render "show"
     end

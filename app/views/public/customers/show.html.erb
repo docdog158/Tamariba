@@ -1,6 +1,6 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
-    
+
     <div class='col-md-3 mt-3'>
       <table class='table'>
         <tr><%= image_tag @customer.get_profile_image, size:'100x100' %></tr>
@@ -21,12 +21,12 @@
           <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %><small>フォロワー</small></th>
         </tr>
       </table>
-      
-      
+
+
       <div><%= link_to liked_posts_customer_path(@customer), data: { "turbolinks" => false } ,class: "btn btn-info text-light m-2 mt-2" do %>
         <i class="fas fa-thumbs-up"></i>いいねした投稿<% end %>
       </div>
-      
+
       <div>
       <% if @customer != current_customer %>
         <% if current_customer.following?(@customer) && @customer.following?(current_customer) %>
@@ -43,14 +43,14 @@
         <% end %>
       <% end %>
       </div>
-      
-      <div><%= render 'follow', cust: @customer %></div>
 
-    
-    
-    
-    
-    
+      <div><%= render 'follow', customer: @customer %></div>
+
+
+
+
+
+
     <div class='col-md-8 mt-3 offset-md-1'>
       <h2><%= @customer.name %>の投稿一覧</h2>
       <div class='d-flex flex-wrap'>
@@ -58,18 +58,18 @@
           <div class="d-flex flex-wrap col-md-6">
             <div class="card m-4 w-100" style="">
               <div class="card-body text-center">
-                
+
                 <div class="card-title">
                   <%= link_to post_pet_path(post_pet.id) do %>
                     <%= post_pet.title %>
                   <% end %>
                 </div>
-                
+
                 <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
                   <%= image_tag post_pet.image, size: "200x180" %>
                   <%= render "favorites/btn", post_pet: post_pet %>
                 </div>
-                
+
                 <div>
                   <%= link_to customer_path(post_pet.customer) do %>
                     <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
