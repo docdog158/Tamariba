@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
     end
     get "search" => "searches#search"
-    get "search_tag" => "post_workouts#search_tag"
+    get "search_tag" => "post_pets#search_tag", as: "search_tag"
   end
 
 

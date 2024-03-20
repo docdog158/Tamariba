@@ -11,7 +11,7 @@
 
       <% if @post_pet.customer == current_customer %>
         <td><%= link_to 'Edit', edit_post_pet_path(@post_pet), class: "btn btn-sm btn-success" %></td>
-        <td><%= link_to 'Destroy', @post_pet, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+        <td><%= link_to 'Destroy',  post_pet_path(@post_pet), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
       <% end %>
 
       <% @post_tags.each do |tag| %>

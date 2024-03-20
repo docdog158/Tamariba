@@ -1,5 +1,5 @@
 class PostPet < ApplicationRecord
-  belongs_to :customer,dependent: :destroy
+  belongs_to :customer
   has_many :favorites,dependent: :destroy
   has_many :post_comments,dependent: :destroy
   #Action_Text

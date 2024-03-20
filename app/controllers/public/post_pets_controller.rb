@@ -40,7 +40,7 @@ class Public::PostPetsController < ApplicationController
 
   def destroy
     @post_pet = PostPet.find(params[:id])
-    @post_pet.destroy
+    @post_pet.destroy!
     redirect_to customer_path
   end
 
