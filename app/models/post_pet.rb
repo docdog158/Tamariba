@@ -12,7 +12,6 @@ class PostPet < ApplicationRecord
   has_one_attached :image
   validates :image,presence:true
 
-
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -39,7 +38,7 @@ class PostPet < ApplicationRecord
     end
   end
 
-  has_many :post_tags
+  has_many :post_tags,dependent: :destroy
   has_many :tags, through: :post_tags
 
   def save_tags(tags)

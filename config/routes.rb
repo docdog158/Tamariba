@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     root to: "homes#top"
-    resources :customers, only: [:index, :show, :edit, :update]
-    resources :post_pets do
+    resources :customers, only: [:index, :show, :destroy]
+    resources :post_pets, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
     get "search" => "searches#search"
@@ -23,9 +23,8 @@ Rails.application.routes.draw do
     root :to => 'homes#top'
     get "search" => "searches#search"
     get "search_tag" => "post_pets#search_tag", as: "search_tag"
-    get 'customers/unsubscribe', to: 'customers#unsubscribe'
-    patch 'customers/withdraw', to: 'customers#withdraw'
-    resources :customers,only: [:show, :edit, :update]do
+    resources :customers,only: [:show, :edit, :update , :destroy]do
+      get 'unsubscribe', to: 'customers#unsubscribe'
     #フォロー機能
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
