@@ -18,7 +18,7 @@ body {
 }
 header {
   height: 12vh;
-  background-image: url("pattern_camo1.jpg");
+  background-image: image-url("pattern_camo1.jpg");
   position: absolute;
   top: 0;
   z-index: 10;
