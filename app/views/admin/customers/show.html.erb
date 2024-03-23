@@ -40,7 +40,7 @@
               <div class="card-body text-center">
 
                 <div class="card-title">
-                  <%= link_to post_pet_path(post_pet.id) do %>
+                  <%= link_to admin_post_pet_path(post_pet.id) do %>
                     <%= post_pet.title %>
                   <% end %>
                 </div>
@@ -51,7 +51,7 @@
                 </div>
 
                 <div>
-                  <%= link_to customer_path(post_pet.customer) do %>
+                  <%= link_to admin_customer_path(post_pet.customer) do %>
                     <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
                     <%= post_pet.customer.name %>
                   <% end %>

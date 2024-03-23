@@ -6,8 +6,7 @@
 
         <thead>
           <tr>
-            <th>User</th>
-            <th>Title</th>
+            <th>ユーザー</th>
           </tr>
         </thead>
 
@@ -15,7 +14,7 @@
         <tbody>
           <tr>
             <td>
-              <%= link_to customer_path(customer) do %>
+              <%= link_to admin_customer_path(customer) do %>
                 <%= image_tag customer.get_profile_image, size:"100x100" %>
                 <%= customer.name %>
                 <%= customer.introduction %>

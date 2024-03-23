@@ -24,8 +24,6 @@ class Customer < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
     
-
-  
   # フォローしている,されている関連付け
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
