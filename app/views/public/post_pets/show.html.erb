@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="mx-auto">
-      <%= @post_pet.title %>
+    <div class="mx-auto mt-3">
+      <%= image_tag @post_pet.image %><br>
+      <%= @post_pet.title %><br>
       <%= @post_pet.content %>
 
       <td id="favorite_btn_<%= @post_pet.id %>">
@@ -10,7 +11,12 @@
 
       <% if @post_pet.customer == current_customer %>
         <td><%= link_to 'Edit', edit_post_pet_path(@post_pet), class: "btn btn-sm btn-success" %></td>
-        <td><%= link_to 'Destroy', @post_pet, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+        <td><%= link_to 'Destroy',  post_pet_path(@post_pet), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+      <% end %>
+
+      <% @post_tags.each do |tag| %>
+      <i class="fa-sharp fa-solid fa-tag"></i>
+        <%= link_to tag.name,search_path(tag_id: tag.id) %>
       <% end %>
 
       <div>

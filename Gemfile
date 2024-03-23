@@ -57,7 +57,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
-gem 'ransack'
 gem 'actiontext'
 gem 'dotenv-rails'
 group :production do
@@ -66,3 +65,5 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+gem 'kaminari','~> 1.2.1'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'

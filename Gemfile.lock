@@ -67,6 +67,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.40.0)
@@ -104,6 +107,18 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -183,10 +198,6 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rake (13.1.0)
-    ransack (4.1.1)
-      activerecord (>= 6.1.5)
-      activesupport (>= 6.1.5)
-      i18n
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -261,12 +272,14 @@ PLATFORMS
 DEPENDENCIES
   actiontext
   bootsnap (>= 1.4.4)
+  bootstrap5-kaminari-views (~> 0.0.1)
   byebug
   capybara (>= 3.26)
   devise
   dotenv-rails
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  kaminari (~> 1.2.1)
   listen (~> 3.3)
   mini_magick
   mysql2
@@ -278,7 +291,6 @@ DEPENDENCIES
   puma (~> 3.11)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.7)
-  ransack
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring

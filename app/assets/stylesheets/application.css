@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background-color: rgba(255, 255, 128, .5);
+}
+header {
+  height: 12vh;
+  background-image: image-url("pattern_camo1.jpg");
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  font-family: 'Sawarabi Mincho', sans-serif;
+}
+main {
+  background-color: rgba(255, 255, 128, .5);
+  min-height: 78vh;
+}
+
+footer{
+  text-align: justify;
+  height: 10vh;
+  width: 100%;
+  background-color: #5a4d43;
+}
+
+
+.card-body__favorite-position {
+  position: relative;
+}
+.card-body__favorite-position > a {
+  position: absolute;
+  top: 70%;
+  right: 20%;
+}

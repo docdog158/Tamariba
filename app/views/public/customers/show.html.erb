@@ -1,7 +1,86 @@
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <%= render 'info', customer: @customer %>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+
+    <div class='col-md-3 mt-3'>
+      <table class='table'>
+        <tr><%= image_tag @customer.get_profile_image, size:'100x100' %></tr>
+        <tr>
+      	  <th><%= @customer.name %></th>
+        </tr>
+        <tr>
+      	  <th><%= @customer.introduction %></th>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <th>フォロー中　　　　・</th>
+          <th><%= link_to @customer.followings.count, customer_followings_path(@customer) %><small>フォロー</small></th>
+        </tr>
+        <tr>
+          <th>フォロワー　　　　・</th>
+          <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %><small>フォロワー</small></th>
+        </tr>
+      </table>
+
+
+      <div><%= link_to liked_posts_customer_path(@customer), data: { "turbolinks" => false } ,class: "btn btn-info text-light m-2 mt-2" do %>
+        <i class="fas fa-thumbs-up"></i>いいねした投稿<% end %>
+      </div>
+
+      <div>
+      <% if @customer != current_customer %>
+        <% if current_customer.following?(@customer) && @customer.following?(current_customer) %>
+          <% if @isRoom == true %>
+            <%= link_to "チャットへ", room_path(@roomId), class: "btn btn-primary text-light" %>
+          <% else %>
+            <%= form_for @room do |f| %>
+              <%= fields_for @entry do |e| %>
+                <%= e.hidden_field :customer_id, value: @customer.id %>
+              <% end %>
+              <%= f.submit "チャットを始める", class: "btn btn-primary text-light customer-show-chat" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+      </div>
+
+      <div><%= render 'follow', customer: @customer %></div>
+
+
+
+
+
+
+    <div class='col-md-8 mt-3 offset-md-1'>
+      <h2><%= @customer.name %>の投稿一覧</h2>
+      <div class='d-flex flex-wrap'>
+        <% @post_pets.each do |post_pet| %>
+          <div class="d-flex flex-wrap col-md-6">
+            <div class="card m-4 w-100" style="">
+              <div class="card-body text-center">
+
+                <div class="card-title">
+                  <%= link_to post_pet_path(post_pet.id) do %>
+                    <%= post_pet.title %>
+                  <% end %>
+                </div>
+
+                <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
+                  <%= image_tag post_pet.image, size: "200x180" %>
+                  <%= render "favorites/btn", post_pet: post_pet %>
+                </div>
+
+                <div>
+                  <%= link_to customer_path(post_pet.customer) do %>
+                    <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
+                    <%= post_pet.customer.name %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

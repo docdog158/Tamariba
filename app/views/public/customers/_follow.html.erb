@@ -1,0 +1,9 @@
+
+  <% if current_customer != customer %>
+    <td><%= render "relationships/btn", customer: customer, options: { class: ""} %></td>
+  <% else %>
+    <%= link_to edit_customer_path(customer), class: "btn btn-outline-secondary text-light btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  <% end %>
+</div>

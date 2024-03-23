@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_13_013015) do
+ActiveRecord::Schema.define(version: 2024_03_18_111336) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -51,8 +51,15 @@ ActiveRecord::Schema.define(version: 2024_03_13_013015) do
   end
 
   create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "customers", force: :cascade do |t|
@@ -61,9 +68,22 @@ ActiveRecord::Schema.define(version: 2024_03_13_013015) do
     t.string "name", null: false
     t.string "introduction"
     t.boolean "is_active", default: true
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_entries_on_customer_id"
+    t.index ["room_id"], name: "index_entries_on_room_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -71,6 +91,16 @@ ActiveRecord::Schema.define(version: 2024_03_13_013015) do
     t.integer "post_pet_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "room_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_messages_on_customer_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -89,6 +119,16 @@ ActiveRecord::Schema.define(version: 2024_03_13_013015) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "post_tags", force: :cascade do |t|
+    t.integer "post_pet_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_pet_id", "tag_id"], name: "index_post_tags_on_post_pet_id_and_tag_id", unique: true
+    t.index ["post_pet_id"], name: "index_post_tags_on_post_pet_id"
+    t.index ["tag_id"], name: "index_post_tags_on_tag_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -96,6 +136,25 @@ ActiveRecord::Schema.define(version: 2024_03_13_013015) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "entries", "customers"
+  add_foreign_key "entries", "rooms"
+  add_foreign_key "messages", "customers"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "post_tags", "post_pets"
+  add_foreign_key "post_tags", "tags"
 end

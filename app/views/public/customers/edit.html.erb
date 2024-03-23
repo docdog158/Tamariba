@@ -1,5 +1,5 @@
 <%= form_with model: @customer, url: customer_path, local: true do |f| %>
-  <div class="container mt-4">
+  <div class="container ">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -9,13 +9,13 @@
           </div>
           <div class="card-body">
             <table class="table">
-              
+
               <tbody>
                 <div class="form-group">
                   <%= f.label :image %>
                   <%= f.file_field :profile_image, class: "form-control-file customerr_image", accept: 'image/*' %>
                 </div>
-                
+
                 <tr>
                   <th>名前</th>
                   <td>
@@ -32,9 +32,9 @@
             </table>
             <div class="text-center">
               <%= f.submit "編集内容を保存", class:" mr-5 btn btn-success" %>
-              <%= link_to "退会する", customers_unsubscribe_path, class:"ml-5 btn btn-sm btn-danger" %>
+              <%= link_to "退会する", customer_unsubscribe_path(@customer), class:"ml-5 btn btn-sm btn-danger" %>
             </div>
-            
+
           </div>
         </div>
       </div>

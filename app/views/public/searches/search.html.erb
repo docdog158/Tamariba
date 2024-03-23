@@ -1,0 +1,70 @@
+<div class="container">
+  <div class='row'>
+    <% if @range == "ユーザー検索" %>
+      <table class="table border table-hover table-inverse mt-3">
+      
+
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+
+        <% @customers.each do |customer| %>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to customer_path(customer) do %>
+                <%= image_tag customer.get_profile_image, size:"100x100" %>
+                <%= customer.name %>
+                <%= customer.introduction %>
+              <% end %>
+            </td>
+
+            <td>
+              <%= render 'public/customers/follow', customer: customer %>
+            </td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    <% else %>
+    <div class="col mt-3">
+      <h2>投稿一覧</h2>
+      <div class='row'>
+        <% @post_pets.each do |post_pet| %>
+          <div class="d-flex flex-wrap col">
+            <div class="card m-4 w-100" style="">
+              <div class="card-body text-center">
+                
+                <div class="card-title">
+                  <%= link_to post_pet_path(post_pet.id) do %>
+                    <%= post_pet.title %>
+                  <% end %>
+                </div>
+                
+                <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
+                  <%= image_tag post_pet.image, size: "200x180" %>
+                  <%= render "favorites/btn", post_pet: post_pet %>
+                </div>
+                
+                <div>
+                  <% strip_tags(post_pet.content.to_s).gsub(/[\n]/,"").strip.truncate(20) %>
+                </div>
+                
+                <div>
+                  <%= link_to customer_path(post_pet.customer) do %>
+                    <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
+                    <%= post_pet.customer.name %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+      <% end %>
+  </div>
+</div>

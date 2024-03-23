@@ -6,6 +6,10 @@ class Customer < ApplicationRecord
   has_many :post_pets ,dependent: :destroy
   has_many :favorites ,dependent: :destroy
   has_many :post_comments ,dependent: :destroy
+  
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :rooms, through: :entries
   has_one_attached :profile_image
   
   validates :name, uniqueness: true, presence: true,
@@ -45,4 +49,17 @@ class Customer < ApplicationRecord
     followings.include?(customer)
   end
   
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @customer = Customer.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @customer = Customer.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @customer = Customer.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @customer = Customer.where("name LIKE?","%#{word}%")
+    else
+      @customer = Customer.all
+    end
+  end
 end

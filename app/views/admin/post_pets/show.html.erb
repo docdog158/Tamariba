@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto mt-3">
+      <%= image_tag @post_pet.image %><br>
+      <%= @post_pet.title %><br>
+      <%= @post_pet.content %>
+
+      <td id="favorite_btn_<%= @post_pet.id %>">
+        <%= render "favorites/btn", post_pet: @post_pet %>
+      </td>
+
+      <td><%= link_to 'Destroy',  admin_post_pet_path(@post_pet), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+
+
+      <% @post_tags.each do |tag| %>
+      <i class="fa-sharp fa-solid fa-tag"></i>
+        <%= link_to tag.name,search_path(tag_id: tag.id) %>
+      <% end %>
+
+      <div>
+        <p>コメント件数：<%= @post_pet.post_comments.count %></p>
+        <table>
+          <tbody>
+            <% @post_pet.post_comments.each do |post_pet_comment| %>
+            <tr>
+              <td>
+                <%= link_to customer_path(post_pet_comment.customer) do %>
+                  <%= image_tag post_pet_comment.customer.get_profile_image, size: "50x50" %><br>
+                  <%= post_pet_comment.customer.name %>
+                <% end %>
+              </td>
+              <td><%= post_pet_comment.comment %></td>
+              <td>
+                <% if post_pet_comment.customer == current_customer %>
+                  <%= link_to "Destroy",  post_pet_post_comment_path(@post_pet, post_pet_comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
