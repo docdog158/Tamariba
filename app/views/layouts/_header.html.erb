@@ -2,11 +2,10 @@
   <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
       <%= link_to root_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-        home
-        <%#= image_tag "1.png" %>
+        ホーム
       <% end %>
       <%= render 'layouts/search' %>
-      
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -15,58 +14,63 @@
         <% if admin_signed_in? %>
           <li>
             <%=  link_to admin_post_pets_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-cake-candles"></i>Posts
+              <i class="fa-solid fa-inbox"></i></i>投稿一覧
             <% end %>
           </li>
           <li>
             <%=  link_to admin_customers_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-users"></i>Customers
-            <% end %> 
+              <i class="fa-solid fa-users"></i>会員一覧
+            <% end %>
           </li>
           <li>
             <%= link_to destroy_admin_session_path,method: :delete, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>ログアウト
             <% end %>
           </li>
-          
+
         <% elsif customer_signed_in? %>
-        
+
           <li>
             <%= link_to customer_path(current_customer),class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-user"></i>My page
+              <i class="fa-solid fa-user"></i>マイページ
             <% end %>
           </li>
           <li>
             <%=  link_to post_pets_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-cake-candles"></i>Posts
+              <i class="fa-solid fa-inbox"></i></i>投稿一覧
             <% end %>
           </li>
           <li>
             <%= link_to destroy_customer_session_path, method: :delete,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>ログアウト
             <% end %>
           </li>
-          
+
 
           <li>
             <%= link_to new_post_pet_path ,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-arrow-right-from-bracket"></i>投稿する
+              <i class="fa-solid fa-pen"></i></i>投稿する
             <% end %>
           </li>
         <% else %>
           <li>
             <%=  link_to post_pets_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-cake-candles"></i>Posts
+              <i class="fa-brands fa-readme"></i></i></i>投稿一覧
             <% end %>
           </li>
+
+          <li>
+            <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
+          </li>
+
           <li>
             <%=  link_to new_customer_registration_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-user-plus"></i>Sign Up
+              <i class="fa-solid fa-user-plus"></i>サインアップ
             <% end %>
           </li>
           <li>
             <%= link_to new_customer_session_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-arrow-right-to-bracket"></i>Log In
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>ログイン
             <% end %>
           </li>
         <% end %>

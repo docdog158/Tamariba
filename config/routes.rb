@@ -32,20 +32,21 @@ Rails.application.routes.draw do
       member do
         get :liked_posts
       end
-      
-    end 
-    
+    end
+
+  devise_scope :customer do
+    post 'public/guest_sign_in', to: 'sessions#guest_sign_in'
+  end
+
     resources :messages, only: [:create]
     resources :rooms, only: [:create, :show]
-    
+
     resources :post_pets do
       resources :post_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
-    
+
     end
   end
-
-  #guest機能
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
