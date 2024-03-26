@@ -15,9 +15,12 @@
                     <% end %>
                   </div>
                   
-                  <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
+                  <div>
                     <%= image_tag post_pet.image, size: "200x180" %>
-                    <%= render "favorites/btn", post_pet: post_pet %>
+                  </div>
+                  
+                  <div id="favorite_btn_<%= post_pet.id %>">
+                    <%= render "public/favorites/btn", post_pet: post_pet %>
                   </div>
                   
                   <div>

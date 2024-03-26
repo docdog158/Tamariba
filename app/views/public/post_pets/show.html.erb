@@ -5,9 +5,9 @@
       <%= @post_pet.title %><br>
       <%= @post_pet.content %>
 
-      <td id="favorite_btn_<%= @post_pet.id %>">
-        <%= render "favorites/btn", post_pet: @post_pet %>
-      </td>
+      <div id="favorite_btn_<%= @post_pet.id %>">
+        <%= render "public/favorites/btn", post_pet: @post_pet %>
+      </div>
 
       <% if @post_pet.customer == current_customer %>
         <td><%= link_to 'Edit', edit_post_pet_path(@post_pet), class: "btn btn-sm btn-success" %></td>

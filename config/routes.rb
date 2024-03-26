@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     root to: "homes#top"
+    resources :tags, only: [:index, :destroy]
     resources :customers, only: [:index, :show, :destroy]
     resources :post_pets, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]

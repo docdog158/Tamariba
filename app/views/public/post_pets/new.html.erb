@@ -3,7 +3,7 @@
       <div class="mx-auto mt-3">
 
         <%= form_with model:@post_pet , url: post_pets_path ,local: true do |f| %>
-        
+        <%= render 'layouts/errors', obj: @post_pet %>
         <div>お気に入りの一枚
           <%= f.file_field :image, accept: "image/*" %>
         </div>
