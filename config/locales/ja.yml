@@ -4,11 +4,16 @@ ja:
     models:
       # view側： User.model_name.human => "ユーザ" / t("activerecord.models.user")と同じ
       customer: ユーザー
+      post_pet: 投稿
     attributes:
         customer:
           name: 名前
           Password: パスワード
           Email: eメール
+        post_pet:
+          content: 紹介文
+          title: 題名
+          image: お気に入りの一枚
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
