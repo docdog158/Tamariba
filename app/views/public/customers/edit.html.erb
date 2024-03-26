@@ -2,7 +2,7 @@
   <div class="container ">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card">
+        <div class="card mt-3">
           <%#= render 'layouts/errors', obj: @customer %>
           <div class="card-header text-center">
             <h3>会員情報編集</h3>
@@ -19,7 +19,7 @@
                 <tr>
                   <th>名前</th>
                   <td>
-                    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control mb-2" %>
+                    <%= f.text_field :name, autofocus: true, autocomplete: "名前", class: "form-control mb-2" %>
                   </td>
                 </tr>
                 <tr>

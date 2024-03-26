@@ -1,8 +1,15 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :ensure_normal_user, except: [:index]
+
+  def ensure_normal_user
+    if current_customer.email == 'guest@example.com'
+      redirect_to about_path
+    end
+  end
 
   def index
-    @customers = Customer.page(params[:page]).per(10)
+    @customers = Customer.page(params[:page]).per(12)
   end
   def show
     @customer = Customer.find(params[:id])
