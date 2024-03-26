@@ -1,4 +1,5 @@
 class Admin::PostPetsController < ApplicationController
+  before_action :authenticate_admin!
   
   def edit
     @post_pet = PostPet.find(params[:id])
