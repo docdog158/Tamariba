@@ -25,13 +25,7 @@ class PostPet < ApplicationRecord
   end
 
   def self.looks(search, word)
-    if search == "perfect_match"
-      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
-    elsif search == "forward_match"
-      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
-    elsif search == "backward_match"
-      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
-    elsif search == "partial_match"
+    if search == "partial"
       @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
     else
       @post_pet = PostPet.all

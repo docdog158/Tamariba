@@ -13,11 +13,6 @@
         <ul class="navbar-nav ml-auto">
         <% if admin_signed_in? %>
           <li>
-            <%=  link_to admin_tags_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-inbox"></i></i>タグ一覧
-            <% end %>
-          </li>
-          <li>
             <%=  link_to admin_post_pets_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
               <i class="fa-solid fa-inbox"></i></i>投稿一覧
             <% end %>
