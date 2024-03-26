@@ -4,11 +4,7 @@
       <%= image_tag @post_pet.image %><br>
       <%= @post_pet.title %><br>
       <%= @post_pet.content %>
-
-      <td id="favorite_btn_<%= @post_pet.id %>">
-        <%= render "favorites/btn", post_pet: @post_pet %>
-      </td>
-
+      
       <td><%= link_to 'Destroy',  admin_post_pet_path(@post_pet), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
 
 

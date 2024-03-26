@@ -12,9 +12,9 @@
 
         <thead>
           <tr>
-            <th>User</th>
-            <th>Title</th>
-            <th>Content</th>
+            <th>ユーザー</th>
+            <th>お気に入りの一枚</th>
+            <th>タイトル</th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -29,15 +29,17 @@
                 <%= post_pet.customer.name %>
               <% end %>
             </td>
+            
+            
+            <td>
+              <%= link_to post_pet_path(post_pet.id) do %>
+                <%= image_tag post_pet.image, size: "200x180" %>
+              <% end %>
+            </td>
 
             <td>
               <%= link_to post_pet_path(post_pet.id) do %>
                 <%= post_pet.title %>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to post_pet_path(post_pet.id) do %>
-                <%= post_pet.content %>
               <% end %>
             </td>
 

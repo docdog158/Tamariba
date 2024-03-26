@@ -21,11 +21,6 @@
           <th><%= link_to @customer.followers.count, customer_followers_path(@customer) %><small>フォロワー</small></th>
         </tr>
       </table>
-
-
-      <div><%= link_to liked_posts_customer_path(@customer), data: { "turbolinks" => false } ,class: "btn btn-info text-light m-2 mt-2" do %>
-        <i class="fas fa-thumbs-up"></i>いいねした投稿<% end %>
-      </div>
       <div>
        <%= link_to "退会させる", admin_customer_path(@customer), method: :delete, class:"ml-5 btn btn-danger" %>
       </div>
@@ -45,9 +40,10 @@
                   <% end %>
                 </div>
 
-                <div id="favorite_btn_<%= post_pet.id %>" class="card-body__favorite-position">
-                  <%= image_tag post_pet.image, size: "200x180" %>
-                  <%= render "favorites/btn", post_pet: post_pet %>
+                <div>
+                  <%= link_to admin_post_pet_path(post_pet.id) do %>
+                    <%= image_tag post_pet.image, size: "200x180" %>
+                  <% end %>
                 </div>
 
                 <div>
