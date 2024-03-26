@@ -1,0 +1,20 @@
+<div class='container'>
+  <div class='row '>
+    <h1 class="mx-auto mt-2">
+      <strong>ゲストログイン利用者へ</strong>
+    </h1>
+  </div>
+
+  <div class='row'>
+    <h4 class="mx-auto">
+      <div class="text-center">
+      ゲストユーザーでは投稿などの機能を利用不可にしております。<br>
+      
+      <%=  link_to destroy_customer_session_path, method: :delete do %>
+        <i class="fa-solid fa-user-plus"></i>サインアップ
+      <% end %><br>
+      
+      </div>
+    </h4>
+  </div>
+</div>

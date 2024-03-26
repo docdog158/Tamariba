@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   devise_for :customers, controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: 'public/sessions',
+    passwords: 'users/passwords'
   }
   namespace :admin do
     root to: "homes#top"
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root :to => 'homes#top'
+    get "about" => "homes#about"
     get "search" => "searches#search"
     get "search_tag" => "post_pets#search_tag", as: "search_tag"
     resources :customers,only: [:show, :edit, :update , :destroy]do

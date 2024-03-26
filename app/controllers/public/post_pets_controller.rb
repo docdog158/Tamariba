@@ -1,4 +1,13 @@
 class Public::PostPetsController < ApplicationController
+  before_action :authenticate_customer!, except: [:index]
+  before_action :ensure_normal_user, except: [:index ,:show]
+
+  def ensure_normal_user
+    if current_customer.email == 'guest@example.com'
+      redirect_to about_path
+    end
+  end
+
   def new
     @post_pet = PostPet.new
   end

@@ -54,22 +54,24 @@
           </li>
         <% else %>
           <li>
-            <%=  link_to post_pets_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+            <%=  link_to post_pets_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
               <i class="fa-brands fa-readme"></i></i></i>投稿一覧
             <% end %>
           </li>
 
           <li>
-            <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
+            <%= link_to public_guest_sign_in_path, method: :post, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+              <i class="fa-solid fa-user-plus"></i>ゲストログイン（閲覧用）
+            <% end %>
           </li>
 
           <li>
-            <%=  link_to new_customer_registration_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+            <%=  link_to new_customer_registration_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
               <i class="fa-solid fa-user-plus"></i>サインアップ
             <% end %>
           </li>
           <li>
-            <%= link_to new_customer_session_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+            <%= link_to new_customer_session_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
               <i class="fa-solid fa-arrow-right-to-bracket"></i>ログイン
             <% end %>
           </li>

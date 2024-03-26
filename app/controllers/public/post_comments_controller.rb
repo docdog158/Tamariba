@@ -1,5 +1,12 @@
 class Public::PostCommentsController < ApplicationController
-
+  before_action :ensure_normal_user
+  
+  def ensure_normal_user
+    if current_customer.email == 'guest@example.com'
+      redirect_to about_path
+    end
+  end
+  
   def create
     post_pet = PostPet.find(params[:post_pet_id])
     comment = current_customer.post_comments.new(post_comment_params)
