@@ -9,12 +9,13 @@
     <h4 class="mx-auto">
       <div class="text-center">
       ゲストユーザーでは投稿などの機能を利用不可にしております。<br>
-      
-      <%=  link_to destroy_customer_session_path, method: :delete do %>
-        <i class="fa-solid fa-user-plus"></i>サインアップ
-      <% end %><br>
-      
+      <%= link_to destroy_customer_session_path, method: :delete do %>
+        ログアウト
+      <% end %>してログイン、サインアップをしてご利用ください。
       </div>
     </h4>
+  </div>
+  <div class="mx-auto text-center mt-3">
+    <%= image_tag "IMG_7426.JPG", size: "600x450", alt: "画像" %>
   </div>
 </div>
