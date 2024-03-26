@@ -8,8 +8,8 @@ ja:
     attributes:
         customer:
           name: 名前
-          Password: パスワード
-          Email: eメール
+          password: パスワード
+          email: eメール
         post_pet:
           content: 紹介文
           title: 題名
