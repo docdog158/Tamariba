@@ -48,9 +48,11 @@
 
 
           <li>
-            <%= link_to new_post_pet_path ,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-pen"></i></i>投稿する
-            <% end %>
+            <% if current_customer.email != 'guest@example.com' %>
+              <%= link_to new_post_pet_path ,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+                <i class="fa-solid fa-pen"></i></i>投稿する
+              <% end %>
+          <% end %>
           </li>
         <% else %>
           <li>

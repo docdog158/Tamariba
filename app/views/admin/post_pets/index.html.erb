@@ -5,7 +5,7 @@
 
       <% @tag_list.each do |list|%>
         <i class="fa-sharp fa-solid fa-tag"></i>
-        <%=link_to list.name, search_tag_path(tag_id: list.id) %>
+          <%=link_to list.name, admin_search_tag_path(tag_id: list.id) %>
         <%="(#{list.post_pets.count})" %>
       <% end %>
     </div>
@@ -28,7 +28,16 @@
                 </div>
                 
                 <div>
-                  <% strip_tags(post_pet.content.to_s).gsub(/[\n]/,"").strip.truncate(20) %>
+                  <%= truncate_content(post_pet.content, 20) %>
+                </div>
+
+                <div class="d-flex text-center">
+                  <div class='col'>
+                    <i class="fa-regular fa-comment"></i><%= post_pet.post_comments.count %>
+                  </div>
+                  <div id="favorite_btn_<%= post_pet.id %>" class="col ml-2">
+                    <%= render "public/favorites/btn", post_pet: post_pet %>
+                  </div>
                 </div>
                 
                 <div>

@@ -2,26 +2,18 @@
   <div class='row'>
     <% if @range == "ユーザー検索" %>
       <table class="table border table-hover table-inverse mt-3">
-      
-
         <thead>
-          <tr>
-            <th>ユーザー</th>
-          </tr>
+          <th>ユーザー</th>
         </thead>
-
         <% @customers.each do |customer| %>
         <tbody>
-          <tr>
-            <td>
-              <%= link_to admin_customer_path(customer) do %>
-                <%= image_tag customer.get_profile_image, size:"100x100" %>
-                <%= customer.name %>
-                <%= customer.introduction %>
-              <% end %>
-            </td>
-
-          </tr>
+          <td>
+            <%= link_to admin_customer_path(customer) do %>
+              <%= image_tag customer.get_profile_image, size:"100x100" %>
+              <%= customer.name %>
+              <%= customer.introduction %>
+            <% end %>
+          </td>
         </tbody>
         <% end %>
       </table>
@@ -33,23 +25,34 @@
           <div class="d-flex flex-wrap col">
             <div class="card m-4 w-100" style="">
               <div class="card-body text-center">
-                
+
                 <div class="card-title">
                   <%= link_to admin_post_pet_path(post_pet.id) do %>
                     <%= post_pet.title %>
                   <% end %>
                 </div>
-                
+
                 <div>
-                  <%= image_tag post_pet.image, size: "200x180" %>
+                  <%= link_to admin_post_pet_path(post_pet.id) do %>
+                    <%= image_tag post_pet.image, size: "200x180" %>
+                  <% end %>
+                </div>
+
+                <div>
+                  <%= truncate_content(post_pet.content, 20) %>
+                </div>
+
+                <div class="d-flex text-center">
+                  <div class='col'>
+                    <i class="fa-regular fa-comment"></i><%= post_pet.post_comments.count %>
+                  </div>
+                  <div id="favorite_btn_<%= post_pet.id %>" class="col ml-2">
+                    <%= render "public/favorites/btn", post_pet: post_pet %>
+                  </div>
                 </div>
                 
                 <div>
-                  <% strip_tags(post_pet.content.to_s).gsub(/[\n]/,"").strip.truncate(20) %>
-                </div>
-                
-                <div>
-                  <%= link_to customer_path(post_pet.customer) do %>
+                  <%= link_to admin_customer_path(post_pet.customer) do %>
                     <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
                     <%= post_pet.customer.name %>
                   <% end %>
@@ -60,6 +63,6 @@
         <% end %>
       </div>
     </div>
-      <% end %>
+    <% end %>
   </div>
 </div>

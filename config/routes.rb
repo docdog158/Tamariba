@@ -11,13 +11,13 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     root to: "homes#top"
+    get "search" => "searches#search"
+    get "search_tag" => "post_pets#search_tag", as: "search_tag"
     resources :tags, only: [:index, :destroy]
     resources :customers, only: [:index, :show, :destroy]
     resources :post_pets, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
-    get "search" => "searches#search"
-    get "search_tag" => "post_pets#search_tag", as: "search_tag"
   end
 
 
