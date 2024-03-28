@@ -2,7 +2,9 @@ class PostPet < ApplicationRecord
   belongs_to :customer
   has_many :favorites,dependent: :destroy
   has_many :post_comments,dependent: :destroy
-  #Action_Text
+  has_many :post_tags,dependent: :destroy
+  has_many :tags, through: :post_tags
+  
   has_rich_text :content
   validates :content, presence: true
 
@@ -26,14 +28,11 @@ class PostPet < ApplicationRecord
 
   def self.looks(search, word)
     if search == "partial"
-      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "#{word}", "#{word}")
+      @post_pet = PostPet.where("title LIKE ? OR content LIKE ?", "%#{word}%", "%#{word}%")
     else
       @post_pet = PostPet.all
     end
   end
-
-  has_many :post_tags,dependent: :destroy
-  has_many :tags, through: :post_tags
 
   def save_tags(tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?

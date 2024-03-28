@@ -6,7 +6,7 @@
       <table class="table table-hover table-inverse">
           <% @tag_list.each do |list|%>
             <i class="fa-sharp fa-solid fa-tag"></i>
-            <%=link_to list.name, search_tag_path(tag_id: list.id) %>
+            <%=link_to list.name, admin_search_tag_path(tag_id: list.id) %>
             <%="(#{list.post_pets.count})" %>
           <% end %>
 
@@ -24,7 +24,7 @@
           <tr>
 
             <td>
-              <%= link_to customer_path(post_pet.customer) do %>
+              <%= link_to admin_customer_path(post_pet.customer) do %>
                 <%= image_tag post_pet.customer.get_profile_image, size:"100x100" %>
                 <%= post_pet.customer.name %>
               <% end %>
@@ -32,13 +32,13 @@
 
 
             <td>
-              <%= link_to post_pet_path(post_pet.id) do %>
+              <%= link_to admin_post_pet_path(post_pet.id) do %>
                 <%= image_tag post_pet.image, size: "200x180" %>
               <% end %>
             </td>
 
             <td>
-              <%= link_to post_pet_path(post_pet.id) do %>
+              <%= link_to admin_post_pet_path(post_pet.id) do %>
                 <%= post_pet.title %>
               <% end %>
             </td>

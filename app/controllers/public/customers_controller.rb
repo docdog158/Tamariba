@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  before_action :ensure_normal_user, except: [:index]
+  before_action :ensure_normal_user, except: [:index ,:show]
 
   def ensure_normal_user
     if current_customer.email == 'guest@example.com'
