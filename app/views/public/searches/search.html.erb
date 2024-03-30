@@ -12,11 +12,15 @@
               <%= link_to customer_path(customer) do %>
                 <%= image_tag customer.get_profile_image, size:"100x100" %>
                 <%= customer.name %>
+              <% end %>
+            </td>
+            <td style="vertical-align: middle;">
+              <%= link_to customer_path(customer) do %>
                 <%= customer.introduction %>
               <% end %>
             </td>
 
-            <td>
+            <td style="vertical-align: middle;">
               <%= render 'public/customers/follow', customer: customer %>
             </td>
           </tr>
@@ -38,8 +42,8 @@
                     <%= post_pet.title %>
                   <% end %>
                 </div>
-                
-                <div>
+
+                <div class=aline_item-center >
                   <%= link_to post_pet_path(post_pet.id) do %>
                     <%= image_tag post_pet.image, size: "200x180" %>
                   <% end %>

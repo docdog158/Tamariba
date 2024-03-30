@@ -11,4 +11,5 @@ class Tag < ApplicationRecord
       @tag = Tag.all
     end
   end
+
 end

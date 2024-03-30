@@ -20,16 +20,14 @@
             <% @post_pet.post_comments.each do |post_pet_comment| %>
             <tr>
               <td>
-                <%= link_to customer_path(post_pet_comment.customer) do %>
+                <%= link_to admin_customer_path(post_pet_comment.customer) do %>
                   <%= image_tag post_pet_comment.customer.get_profile_image, size: "50x50" %><br>
                   <%= post_pet_comment.customer.name %>
                 <% end %>
               </td>
               <td><%= post_pet_comment.comment %></td>
               <td>
-                <% if post_pet_comment.customer == current_customer %>
-                  <%= link_to "Destroy",  post_pet_post_comment_path(@post_pet, post_pet_comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %>
-                <% end %>
+                <%= link_to "Destroy",  post_pet_post_comment_path(@post_pet, post_pet_comment), method: :delete, class: "btn btn-sm btn-danger float-end", remote: true %>
               </td>
             </tr>
             <% end %>
