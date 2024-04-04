@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto mt-3">
-      <%= image_tag @post_pet.image %><br>
-      <%= @post_pet.title %><br>
+      <div style="text-align: center;">
+        <h2><%= @post_pet.title %></h2><br>
+        <%= image_tag @post_pet.image %>
+      </div>
       <%= @post_pet.content %>
       
       <td><%= link_to 'Destroy',  admin_post_pet_path(@post_pet), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
