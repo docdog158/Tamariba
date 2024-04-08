@@ -1,21 +1,24 @@
 <div class="container">
   <div class='row'>
     <% if @range == "ユーザー検索" %>
-      <table class="table border table-hover table-inverse mt-3">
+      <h2 class="p-2">会員一覧</h2>
+      <table class='table table-hover table-inverse mt-3'>
         <thead>
-          <th>ユーザー</th>
+          <tr>
+            <th scope='col' style='width: 10%'>会員ID</th>
+            <th scope='col' style='width: 30%'>氏名</th>
+            <th scope='col' style='width: 40%'>メールアドレス</th>
+          </tr>
         </thead>
-        <% @customers.each do |customer| %>
         <tbody>
-          <td>
-            <%= link_to admin_customer_path(customer) do %>
-              <%= image_tag customer.get_profile_image, size:"100x100" %>
-              <%= customer.name %>
-              <%= customer.introduction %>
-            <% end %>
-          </td>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td><%= customer.id %></td>
+              <td><%= link_to customer.name, admin_customer_path(customer) %></td>
+              <td><%= customer.email %></td>
+            </tr>
+          <% end %>
         </tbody>
-        <% end %>
       </table>
     <% else %>
     <div class="col mt-3">
@@ -50,7 +53,7 @@
                     <%= render "public/favorites/btn", post_pet: post_pet %>
                   </div>
                 </div>
-                
+
                 <div>
                   <%= link_to admin_customer_path(post_pet.customer) do %>
                     <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>

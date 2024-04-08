@@ -14,7 +14,7 @@ class Public::PostPetsController < ApplicationController
 
   def edit
     @post_pet = PostPet.find(params[:id])
-
+    @tag_list = @post_pet.tags.pluck(:name).join(',')
   end
 
   def show
@@ -26,7 +26,12 @@ class Public::PostPetsController < ApplicationController
   end
 
   def index
-    @post_pets = PostPet.all
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
+    @post_pets = PostPet.all.sort {|a,b|
+      b.favorites.where(created_at: from...to).size <=>
+      a.favorites.where(created_at: from...to).size
+    }
     @tag_list = Tag.all
   end
 
@@ -50,12 +55,14 @@ class Public::PostPetsController < ApplicationController
   def destroy
     @post_pet = PostPet.find(params[:id])
     @post_pet.destroy
-    redirect_to customer_path
+    redirect_to post_pets_path
   end
 
   def update
     @post_pet = PostPet.find(params[:id])
+    @tag_list=params[:post_pet][:name].split(',')
     if @post_pet.update(post_pet_params)
+      @post_pet.save_tags(@tag_list)
       redirect_to post_pet_path(@post_pet), notice:'投稿を編集しました'
     else
       render "show"

@@ -4,7 +4,6 @@ class Admin::PostPetsController < ApplicationController
   def show
     @post_pet = PostPet.find(params[:id])
     @customer = @post_pet.customer
-    @tag_list = @post_pet.tags.pluck(:name).join(',')
     @post_tags = @post_pet.tags
   end
 
@@ -21,7 +20,13 @@ class Admin::PostPetsController < ApplicationController
 
   def destroy
     @post_pet = PostPet.find(params[:id])
+    @post_pet.tags.each do |tag|
+      if tag.post_pets.count==1
+        tag.destroy
+      end
+    end
     @post_pet.destroy
+
     redirect_to admin_post_pets_path
   end
 

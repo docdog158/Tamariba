@@ -12,21 +12,21 @@
       <div class='row'>
         <% @post_pets.each do |post_pet| %>
           <div class="d-flex flex-wrap col">
-            <div class="card m-4 w-100" style="">
+            <div class="card m-4" style="width: 18rem;">
               <div class="card-body text-center">
-                
+
                 <div class="card-title">
                   <%= link_to admin_post_pet_path(post_pet.id) do %>
                     <%= post_pet.title %>
                   <% end %>
                 </div>
-                
+
                 <div>
                   <%= link_to admin_post_pet_path(post_pet.id) do %>
                     <%= image_tag post_pet.image, size: "200x180" %>
                   <% end %>
                 </div>
-                
+
                 <div>
                   <%= truncate_content(post_pet.content, 20) %>
                 </div>
@@ -39,9 +39,9 @@
                     <%= render "public/favorites/btn", post_pet: post_pet %>
                   </div>
                 </div>
-                
+
                 <div>
-                  <%= link_to customer_path(post_pet.customer) do %>
+                  <%= link_to admin_customer_path(post_pet.customer) do %>
                     <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
                     <%= post_pet.customer.name %>
                   <% end %>

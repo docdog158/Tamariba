@@ -9,6 +9,7 @@ Admin.create!(
    email: 'admin@admin',
    password: ENV['SECRET_KEY']
 )
+
 test1 = Customer.find_or_create_by!(email: "test1@example.com") do |customer|
   customer.name = "test1"
   customer.password = "password1"
