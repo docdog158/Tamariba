@@ -9,45 +9,44 @@
         <%="(#{list.post_pets.count})" %>
       <% end %>
     </div>
-    <div class='row'>
-      <% @post_pets.each do |post_pet| %>
-         <div class="d-flex flex-wrap col">
-          <div class="card m-4" style="width: 18rem;">
-            <div class="card-body text-center">
-
-              <div class="card-title">
-                <%= link_to post_pet_path(post_pet.id) do %>
-                  <%= post_pet.title %>
-                <% end %>
-              </div>
-
-              <div>
-                <%= link_to post_pet_path(post_pet.id) do %>
-                  <%= image_tag post_pet.image, size: "200x180" %>
-                  <% end %>
-              </div>
-
-              <div>
-                <%= truncate_content(post_pet.content, 20) %>
-              </div>
-
-              <div class="d-flex text-center">
-                <div class='col'>
-                  <i class="fa-regular fa-comment"></i><%= post_pet.post_comments.count %>
+    <div class='col-md-10'>
+      <% @post_pets.each_slice(3) do |post_pet_group| %>
+        <div class="row">
+          <% post_pet_group.each do |post_pet| %>
+            <div class="col">
+              <div class="card m-4" style="width: 15rem;">
+                <div class="card-body text-center">
+                  <div class="card-title">
+                    <%= link_to post_pet_path(post_pet.id) do %>
+                      <%= post_pet.title %>
+                    <% end %>
+                  </div>
+                  <div>
+                    <%= link_to post_pet_path(post_pet.id) do %>
+                      <%= image_tag post_pet.image, size: "200x180" %>
+                    <% end %>
+                  </div>
+                  <div>
+                    <%= truncate_content(post_pet.content, 20) %>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <i class="fa-regular fa-comment"></i><%= post_pet.post_comments.count %>
+                    </div>
+                    <div id="favorite_btn_<%= post_pet.id %>">
+                      <%= render "public/favorites/btn", post_pet: post_pet %>
+                    </div>
+                  </div>
+                  <div>
+                    <%= link_to customer_path(post_pet.customer) do %>
+                      <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
+                      <%= post_pet.customer.name %>
+                    <% end %>
+                  </div>
                 </div>
-                <div id="favorite_btn_<%= post_pet.id %>" class="col ml-2">
-                  <%= render "public/favorites/btn", post_pet: post_pet %>
-                </div>
-              </div>
-
-              <div>
-                <%= link_to customer_path(post_pet.customer) do %>
-                  <%= image_tag post_pet.customer.get_profile_image, size:"50x50" %>
-                  <%= post_pet.customer.name %>
-                <% end %>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       <% end %>
     </div>
