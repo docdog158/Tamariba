@@ -26,12 +26,7 @@ class Public::PostPetsController < ApplicationController
   end
 
   def index
-    to  = Time.current.at_end_of_day
-    from  = (to - 6.day).at_beginning_of_day
-    @post_pets = PostPet.all.sort {|a,b|
-      b.favorites.where(created_at: from...to).size <=>
-      a.favorites.where(created_at: from...to).size
-    }
+    @post_pets = PostPet.page(params[:page]).per(9)
     @tag_list = Tag.all
   end
 
