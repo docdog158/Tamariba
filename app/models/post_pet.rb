@@ -39,7 +39,6 @@ class PostPet < ApplicationRecord
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     old_tags = current_tags - tags
     new_tags = tags - current_tags
-
     old_tags.each do |old_name|
       self.tags.delete Tag.find_by(name:old_name)
     end
