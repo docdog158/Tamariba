@@ -1,8 +1,7 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class='col-md-2 text-center mt-3'>
-      <h2>投稿一覧</h2>
-
+      <h2>タグ一覧</h2>
       <% @tag_list.each do |list|%>
         <i class="fa-sharp fa-solid fa-tag"></i>
         <%=link_to list.name, search_tag_path(tag_id: list.id) %>

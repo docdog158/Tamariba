@@ -5,7 +5,7 @@ class PostPet < ApplicationRecord
   has_many :post_comments,dependent: :destroy
   has_many :post_tags,dependent: :destroy
   has_many :tags, through: :post_tags
-  
+  has_many :notifications, dependent: :destroy
   has_rich_text :content
   validates :content, presence: true
 
@@ -50,12 +50,49 @@ class PostPet < ApplicationRecord
     end
   end
 
-  def self.liked_posts(customer, page, per_page) # 1. モデル内での操作を開始
-  includes(:favorites) # 2. post_favorites テーブルを結合
-    .where(favorites: { customer_id: customer.id }) # 3. ユーザーがいいねしたレコードを絞り込み
-    .order(created_at: :desc) # 4. 投稿を作成日時の降順でソート
-    .page(page) # 5. ページネーションのため、指定ページに表示するデータを選択
-    .per(per_page) # 6. ページごとのデータ数を指定
+  def self.liked_posts(customer, page, per_page)
+  includes(:favorites)
+    .where(favorites: { customer_id: customer.id })
+    .order(created_at: :desc)
+    .page(page)
+    .per(per_page) 
   end
-
+  
+  def create_notification_like!(current_customer)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_pet_id = ? and action = ? ", current_customer.id, customer_id, id, 'like'])
+    if temp.blank?
+      notification = current_customer.active_notifications.new(
+        post_pet_id: id,
+        visited_id: customer_id,
+        action: 'like'
+      )
+      if notification.visitor_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+    end
+  end
+  
+  def create_notification_comment!(current_customer, post_comment_id)
+    temp_ids = PostComment.select(:customer_id).where(post_pet_id: id).where.not(customer_id: current_customer.id).distinct
+    temp_ids.each do |temp_id|
+      save_notification_comment!(current_customer, post_comment_id, temp_id['customer_id'])
+    end
+    save_notification_comment!(current_customer, post_comment_id, customer_id) if temp_ids.blank?
+  end
+  
+  def save_notification_post_comment!(current_customer, post_comment_id, visited_id)
+    notification = current_customer.active_notifications.new(
+      post_pet_id: id,
+      poet_comment_id: post_comment_id,
+      visited_id: visited_id,
+      action: 'comment'
+    )
+    if notification.visitor_id == notification.visited_id
+      notification.checked = true
+    end
+    notification.save if notification.valid?
+  end
+  
+  
 end

@@ -1,0 +1,12 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <% notifications = @notifications.where.not(visitor_id: current_customer.id) %>
+      
+    <% if notifications.exists? %>
+      <%= render partial: 'notification', collection: notifications %>
+      <%= paginate notifications %>
+    <% else %>
+      <p>通知はありません</p>
+    <% end %>
+  </div>
+</div>
