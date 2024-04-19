@@ -1,11 +1,9 @@
 class Public::NotificationsController < ApplicationController
-  
-  def index
-    @notifications = current_customer.passive_notifications.page(params[:page]).per(20)
-    @notifications.where(checked: false).each do |notification|
-      notification.update_attribute(checked: true)
-    end
-  end
-  
-end
+  before_action :authenticate_customer!
 
+  def update
+    notification = current_customer.notifications.find(params[:id])
+    notification.update(read: true)
+    redirect_to notification.notifiable_path(notification)
+  end
+end

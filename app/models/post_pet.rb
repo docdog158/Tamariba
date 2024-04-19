@@ -5,7 +5,7 @@ class PostPet < ApplicationRecord
   has_many :post_comments,dependent: :destroy
   has_many :post_tags,dependent: :destroy
   has_many :tags, through: :post_tags
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   has_rich_text :content
   validates :content, presence: true
 
@@ -58,41 +58,9 @@ class PostPet < ApplicationRecord
     .per(per_page) 
   end
   
-  def create_notification_like!(current_customer)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and post_pet_id = ? and action = ? ", current_customer.id, customer_id, id, 'like'])
-    if temp.blank?
-      notification = current_customer.active_notifications.new(
-        post_pet_id: id,
-        visited_id: customer_id,
-        action: 'like'
-      )
-      if notification.visitor_id == notification.visited_id
-        notification.checked = true
-      end
-      notification.save if notification.valid?
+  after_create do
+    customer.followers.each do |follower|
+      notifications.create(customer_id: follower.id)
     end
   end
-  
-  def create_notification_comment!(current_customer, post_comment_id)
-    temp_ids = PostComment.select(:customer_id).where(post_pet_id: id).where.not(customer_id: current_customer.id).distinct
-    temp_ids.each do |temp_id|
-      save_notification_comment!(current_customer, post_comment_id, temp_id['customer_id'])
-    end
-    save_notification_comment!(current_customer, post_comment_id, customer_id) if temp_ids.blank?
-  end
-  
-  def save_notification_post_comment!(current_customer, post_comment_id, visited_id)
-    notification = current_customer.active_notifications.new(
-      post_pet_id: id,
-      poet_comment_id: post_comment_id,
-      visited_id: visited_id,
-      action: 'comment'
-    )
-    if notification.visitor_id == notification.visited_id
-      notification.checked = true
-    end
-    notification.save if notification.valid?
-  end
-  
-  
 end

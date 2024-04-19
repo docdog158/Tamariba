@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 2024_04_15_025856) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2024_04_15_025856) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -104,18 +104,14 @@ ActiveRecord::Schema.define(version: 2024_04_15_025856) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
-    t.integer "post_pet_id"
-    t.integer "post_comment_id"
-    t.string "action", default: "", null: false
-    t.boolean "checked", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index "\"comment_id\"", name: "index_notifications_on_comment_id"
-    t.index "\"post_id\"", name: "index_notifications_on_post_id"
-    t.index ["visited_id"], name: "index_notifications_on_visited_id"
-    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
+    t.integer "customer_id", null: false
+    t.string "notifiable_type", null: false
+    t.integer "notifiable_id", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_notifications_on_customer_id"
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -170,6 +166,7 @@ ActiveRecord::Schema.define(version: 2024_04_15_025856) do
   add_foreign_key "entries", "rooms"
   add_foreign_key "messages", "customers"
   add_foreign_key "messages", "rooms"
+  add_foreign_key "notifications", "customers"
   add_foreign_key "post_tags", "post_pets"
   add_foreign_key "post_tags", "tags"
 end

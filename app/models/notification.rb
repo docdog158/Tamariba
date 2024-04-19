@@ -1,8 +1,20 @@
 class Notification < ApplicationRecord
-  default_scope -> { order(created_at: :desc) }
-  belongs_to :post_pet, optional: true
-  belongs_to :post_comment, optional: true
-
-  belongs_to :visitor, class_name: 'Customer', foreign_key: 'visitor_id', optional: true
-  belongs_to :visited, class_name: 'Customer', foreign_key: 'visited_id', optional: true
+  include Rails.application.routes.url_helpers
+  belongs_to :customer
+  belongs_to :notifiable, polymorphic: true
+  def message
+    if notifiable_type === "PostPet"
+      "フォローしている#{notifiable.customer.name}さんが#{notifiable.title}を投稿しました"
+    else
+      "投稿した#{notifiable.post_pet.title}が#{notifiable.customer.name}さんにいいねされました"
+    end
+  end
+  
+  def notifiable_path(notification)
+    if notification.notifiable_type === "PostPet"
+      post_pet_path(notification.notifiable_id)
+    else
+      customer_path(notification.notifiable.customer.id)
+    end
+  end
 end

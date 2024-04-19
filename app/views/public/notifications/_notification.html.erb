@@ -5,7 +5,7 @@
   <div class="form-inline">
     <span>
       <%= link_to customer_path(visitor) do %>
-        <%= image_tag avatar_url(visitor).to_s, class: "icon_mini" %>
+        <%= image_tag customer_url(visitor).to_s, class: "icon_mini" %>
         <strong>
           <%= visitor.name %>
         </strong>
@@ -16,17 +16,17 @@
       <% when 'follow' %>
         あなたをフォローしました
       <% when 'like' %>
-        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+        <%= link_to 'あなたの投稿', notification.post_pet, style: "font-weight: bold;" %>
         にいいねしました
       <% when 'comment' %>
-        <% if notification.post.user_id == visited.id %>
+        <% if notification.post_pet.customer_id == visited.id %>
           <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
         <% else %>
           <span>
-            <%= link_to post_path(notification.post) do %>
-              <%= image_tag avatar_url(notification.post.user).to_s, class: "icon_mini" %>
+            <%= link_to post_pet_path(notification.post_pet) do %>
+              <%= image_tag customer_url(notification.post_pet.customer).to_s, class: "icon_mini" %>
               <strong>
-                <%= notification.post.user.name %>さんの投稿
+                <%= notification.post_pet.customer.name %>さんの投稿
               </strong>
             <% end %>
           </span>

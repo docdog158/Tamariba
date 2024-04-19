@@ -31,7 +31,7 @@ class Public::PostPetsController < ApplicationController
   end
 
   def create
-    @post_pet = current_customer.post_pets.build(post_pet_params)
+    @post_pet = current_customer.post_pets.new(post_pet_params)
     @tag_list = params[:post_pet][:name].split(',')
     if @post_pet.save
       @post_pet.save_tags(@tag_list)

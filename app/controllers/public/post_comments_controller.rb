@@ -12,7 +12,6 @@ class Public::PostCommentsController < ApplicationController
     comment = current_customer.post_comments.new(post_comment_params)
     comment.post_pet_id = post_pet.id
     comment.save
-    comment.create_notification_comment!(current_customer, comment.id)
     redirect_to post_pet_path(post_pet)
   end
 

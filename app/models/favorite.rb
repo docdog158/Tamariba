@@ -1,8 +1,8 @@
 class Favorite < ApplicationRecord
-    
   belongs_to :customer
   belongs_to :post_pet
-  
-  validates :customer_id, uniqueness: {scope: :post_pet_id}
-  
+  has_one :notification, as: :notifiable, dependent: :destroy
+  after_create do
+    create_notification(customer_id: post_pet.customer_id)
+  end
 end

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     get "search" => "searches#search"
     get "search_tag" => "post_pets#search_tag", as: "search_tag"
-    resources :notifications, only: :index
+    resources :notifications, only: [:update]
     resources :customers,only: [:show, :edit, :update , :destroy]do
       get 'unsubscribe', to: 'customers#unsubscribe'
       resource :relationships, only: [:create, :destroy]
