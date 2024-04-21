@@ -1,16 +1,35 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class='col-md-2 text-center mt-3'>
-      <h2>タグ一覧</h2>
+      <h3>タグ一覧</h3>
       <% @tag_list.each do |list|%>
         <i class="fa-sharp fa-solid fa-tag"></i>
         <%=link_to list.name, search_tag_path(tag_id: list.id) %>
         <%="(#{list.post_pets.count})" %>
       <% end %>
     </div>
-    <div class='col-md-10'>
-      <% @post_pets.each_slice(3) do |post_pet_group| %>
-        <div class="row">
+    <div class='col-md-10 mt-3'>
+      <div class="d-flex mb-4">
+        
+        <div class="me-auto p-2">
+          <h3>投稿一覧</h3>
+        </div>
+        
+        <div class="p-2">
+          <%= link_to '新着順', post_pets_path(latest: "true"), class: "btn btn-sm #{params[:latest] == 'true' ? 'btn-success' : 'btn-dark'} mr-2" %>
+        </div>
+        
+        <div class="p-2">
+          <%= link_to '古い順', post_pets_path(old: "true"), class: "btn btn-sm #{params[:old] == 'true' ? 'btn-success' : 'btn-dark'} mr-2" %>
+        </div>
+        
+        <div class="p-2">
+          <%= link_to 'いいね順', post_pets_path(most_favorited: "true"), class: "btn btn-sm #{params[:most_favorited] == 'true' ? 'btn-success' : 'btn-dark'}" %>
+        </div>
+        
+      </div>
+      <div class="row">
+        <% @post_pets.each_slice(3) do |post_pet_group| %>
           <% post_pet_group.each do |post_pet| %>
             <div class="col">
               <div class="card m-4" style="width: 15rem;">
@@ -46,8 +65,8 @@
               </div>
             </div>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
       <div class="row my-3 justify-content-center">
         <%= paginate @post_pets %>
       </div>

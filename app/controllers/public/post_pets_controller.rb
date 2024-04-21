@@ -26,8 +26,16 @@ class Public::PostPetsController < ApplicationController
   end
 
   def index
-    @post_pets = PostPet.page(params[:page]).per(9)
     @tag_list = Tag.all
+    if params[:latest]
+      @post_pets = PostPet.page(params[:page]).per(9).latest
+    elsif params[:old]
+      @post_pets = PostPet.page(params[:page]).per(9).old
+    elsif params[:most_favorited]
+      @post_pets = PostPet.page(params[:page]).per(9).most_favorited
+    else
+      @post_pets = PostPet.page(params[:page]).per(9)
+    end
   end
 
   def create

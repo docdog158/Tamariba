@@ -1,6 +1,8 @@
 class PostPet < ApplicationRecord
   belongs_to :customer
   has_many :favorites,dependent: :destroy
+  has_many :favorited_customers, through: :favorites, source: :customer
+
   has_many :week_favorites, -> { where(created_at: 1.week.ago.beginning_of_day..Time.current.end_of_day) }
   has_many :post_comments,dependent: :destroy
   has_many :post_tags,dependent: :destroy
@@ -55,12 +57,20 @@ class PostPet < ApplicationRecord
     .where(favorites: { customer_id: customer.id })
     .order(created_at: :desc)
     .page(page)
-    .per(per_page) 
+    .per(per_page)
   end
-  
+
   after_create do
     customer.followers.each do |follower|
       notifications.create(customer_id: follower.id)
     end
   end
+
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(created_at: :asc) }
+  scope :most_favorited, -> {
+    left_joins(:favorites)
+      .group('post_pets.id')
+      .order('COUNT(favorites.id) DESC')
+  }
 end
