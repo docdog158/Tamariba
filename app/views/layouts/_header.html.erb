@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg ">
   <div class="container-fluid">
-    <%= link_to root_path,class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+    <%= link_to root_path,class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
       ホーム
     <% end %>
     <%= render 'layouts/search' %>
@@ -11,38 +11,38 @@
       <ul class="navbar-nav ml-auto">
       <% if admin_signed_in? %>
         <li>
-          <%=  link_to admin_tags_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%=  link_to admin_tags_path, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-inbox"></i></i>タグ一覧
           <% end %>
         </li>
         <li>
-          <%=  link_to admin_post_pets_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%=  link_to admin_post_pets_path(latest: "true"), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-inbox"></i></i>投稿一覧
           <% end %>
         </li>
         <li>
-          <%=  link_to admin_customers_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%=  link_to admin_customers_path, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-users"></i>会員一覧
           <% end %>
         </li>
         <li>
-          <%= link_to destroy_admin_session_path,method: :delete, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%= link_to destroy_admin_session_path,method: :delete, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-arrow-right-from-bracket"></i>ログアウト
           <% end %>
         </li>
         <% elsif customer_signed_in? %>
         <li>
-          <%= link_to customer_path(current_customer), class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%= link_to customer_path(current_customer), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-user"></i>マイページ
           <% end %>
         </li>
         <li>
-          <%=  link_to post_pets_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%=  link_to post_pets_path(latest: "true"), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-inbox"></i></i>投稿一覧
           <% end %>
         </li>
         <li class="dropdown" onmouseover="this.querySelector('.dropdown-menu').classList.add('show')" onmouseout="this.querySelector('.dropdown-menu').classList.remove('show')">
-          <button class="btn btn-outline-light dropdown-toggle rounded-pill nav-link text-light m-2 mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-outline-success dropdown-toggle rounded-pill nav-link text-light m-2 mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa-solid fa-bell"></i>通知
             <span class="badge badge-danger"><%= current_customer.notifications.where(read: false).count %></span>
           </button>
@@ -58,35 +58,35 @@
           </div>
         </li>
         <li>
-          <%= link_to destroy_customer_session_path, method: :delete, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%= link_to destroy_customer_session_path, method: :delete, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-arrow-right-from-bracket"></i>ログアウト
           <% end %>
         </li>
         <li>
           <% if current_customer.email != 'guest@example.com' %>
-            <%= link_to new_post_pet_path , class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+            <%= link_to new_post_pet_path , class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
               <i class="fa-solid fa-pen"></i></i>投稿する
             <% end %>
           <% end %>
         </li>
       <% else %>
         <li>
-          <%=  link_to post_pets_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%=  link_to post_pets_path(latest: "true"), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-brands fa-readme"></i></i></i>投稿一覧
           <% end %>
         </li>
         <li>
-          <%= link_to public_guest_sign_in_path, method: :post, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%= link_to public_guest_sign_in_path, method: :post, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-user-plus"></i>ゲストログイン（閲覧用）
           <% end %>
         </li>
         <li>
-          <%=  link_to new_customer_registration_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%=  link_to new_customer_registration_path, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-user-plus"></i>サインアップ
           <% end %>
         </li>
         <li>
-          <%= link_to new_customer_session_path, class: 'btn btn-outline-light rounded-pill nav-link text-light m-2 mt-3' do %>
+          <%= link_to new_customer_session_path, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-arrow-right-to-bracket"></i>ログイン
           <% end %>
         </li>
