@@ -73,4 +73,8 @@ class PostPet < ApplicationRecord
       .group('post_pets.id')
       .order('COUNT(favorites.id) DESC')
   }
+  
+  from = Time.current.at_end_of_day
+  to_week = (from - 6.day).at_beginning_of_day
+  to_month = (from - 1.month)
 end
