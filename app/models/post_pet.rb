@@ -2,7 +2,6 @@ class PostPet < ApplicationRecord
   belongs_to :customer
   has_many :favorites,dependent: :destroy
   has_many :favorited_customers, through: :favorites, source: :customer
-
   has_many :week_favorites, -> { where(created_at: 1.week.ago.beginning_of_day..Time.current.end_of_day) }
   has_many :post_comments,dependent: :destroy
   has_many :post_tags,dependent: :destroy
@@ -74,7 +73,26 @@ class PostPet < ApplicationRecord
       .order('COUNT(favorites.id) DESC')
   }
   
-  from = Time.current.at_end_of_day
-  to_week = (from - 6.day).at_beginning_of_day
-  to_month = (from - 1.month)
+  to = Time.current.at_end_of_day
+  scope :with_favorites_count, -> (from, to) {
+    select("post_pets.*, COUNT(favorites.id) AS favorites_count")
+      .joins(:favorites)
+      .where(favorites: { created_at: from..to })
+      .group("post_pets.id")
+  }
+
+  scope :today, -> {
+    from = Time.current.beginning_of_day
+    with_favorites_count(from, to)
+  }
+
+  scope :week, -> {
+    from = 6.days.ago.beginning_of_day
+    with_favorites_count(from, to)
+  }
+
+  scope :month, -> {
+    from = 1.month.ago.beginning_of_day
+    with_favorites_count(from, to)
+  }
 end

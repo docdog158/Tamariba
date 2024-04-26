@@ -18,12 +18,12 @@
       <% if admin_signed_in? %>
         <li>
           <%=  link_to admin_tags_path, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
-            <i class="fa-solid fa-inbox"></i></i>タグ一覧
+            <i class="fa-solid fa-inbox"></i>タグ一覧
           <% end %>
         </li>
         <li>
           <%=  link_to admin_post_pets_path(latest: "true"), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
-            <i class="fa-solid fa-inbox"></i></i>投稿一覧
+            <i class="fa-solid fa-inbox"></i>投稿一覧
           <% end %>
         </li>
         <li>
@@ -38,8 +38,13 @@
         </li>
       <% elsif customer_signed_in? %>
         <li>
+          <%=  link_to ranking_path, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
+            <i class="fa-solid fa-crown"></i>ランキング
+          <% end %>
+        </li>
+        <li>
           <%=  link_to post_pets_path(latest: "true"), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
-            <i class="fa-solid fa-inbox"></i></i>投稿一覧
+            <i class="fa-solid fa-inbox"></i>投稿一覧
           <% end %>
         </li>
         <li class="dropdown" onmouseover="this.querySelector('.dropdown-menu').classList.add('show')" onmouseout="this.querySelector('.dropdown-menu').classList.remove('show')">
@@ -66,14 +71,14 @@
         <li>
           <% if current_customer.email != 'guest@example.com' %>
             <%= link_to new_post_pet_path , class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
-              <i class="fa-solid fa-pen"></i></i>投稿する
+              <i class="fa-solid fa-pen"></i>投稿する
             <% end %>
           <% end %>
         </li>
       <% else %>
         <li>
           <%=  link_to post_pets_path(latest: "true"), class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
-            <i class="fa-brands fa-readme"></i></i></i>投稿一覧
+            <i class="fa-brands fa-readme"></i>投稿一覧
           <% end %>
         </li>
         <li>

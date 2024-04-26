@@ -71,6 +71,18 @@ class Public::PostPetsController < ApplicationController
       render "show"
     end
   end
+  
+  def ranking
+    if params[:today]
+      @post_pets = PostPet.today.order(favorites_count: :desc)
+    elsif params[:week]
+      @post_pets = PostPet.week.order(favorites_count: :desc)
+    elsif params[:month]
+      @post_pets = PostPet.month.order(favorites_count: :desc)
+    else
+      @post_pets = PostPet.today.order(favorites_count: :desc)
+    end
+  end
 
   private
 
