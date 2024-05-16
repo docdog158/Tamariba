@@ -27,8 +27,8 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     get "search_tag" => "post_pets#search_tag", as: "search_tag"
     get 'ranking' => 'post_pets#ranking'
-    resources :notifications, only: [:update]
-    resources :customers,only: [:show, :edit, :update , :destroy]do
+    resources :notifications, only: [:update, :index]
+    resources :customers,only: [:show, :edit, :update, :destroy]do
       get 'unsubscribe', to: 'customers#unsubscribe'
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"

@@ -104,14 +104,18 @@ ActiveRecord::Schema.define(version: 2024_04_15_025856) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "customer_id", null: false
-    t.string "notifiable_type", null: false
-    t.integer "notifiable_id", null: false
-    t.boolean "read", default: false, null: false
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_pet_id"
+    t.integer "post_comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_notifications_on_customer_id"
-    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["post_comment_id"], name: "index_notifications_on_post_comment_id"
+    t.index ["post_pet_id"], name: "index_notifications_on_post_pet_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -166,7 +170,6 @@ ActiveRecord::Schema.define(version: 2024_04_15_025856) do
   add_foreign_key "entries", "rooms"
   add_foreign_key "messages", "customers"
   add_foreign_key "messages", "rooms"
-  add_foreign_key "notifications", "customers"
   add_foreign_key "post_tags", "post_pets"
   add_foreign_key "post_tags", "tags"
 end

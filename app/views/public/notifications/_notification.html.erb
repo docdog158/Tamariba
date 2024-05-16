@@ -5,7 +5,7 @@
   <div class="form-inline">
     <span>
       <%= link_to customer_path(visitor) do %>
-        <%= image_tag customer_url(visitor).to_s, class: "icon_mini" %>
+        <%= image_tag visitor.get_profile_image, size:"50x50" %>
         <strong>
           <%= visitor.name %>
         </strong>
@@ -15,10 +15,10 @@
       <% case notification.action %>
       <% when 'follow' %>
         あなたをフォローしました
-      <% when 'like' %>
+      <% when 'favorite' %>
         <%= link_to 'あなたの投稿', notification.post_pet, style: "font-weight: bold;" %>
         にいいねしました
-      <% when 'comment' %>
+      <% when '"' %>
         <% if notification.post_pet.customer_id == visited.id %>
           <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
         <% else %>
@@ -42,6 +42,6 @@
   <div class="small text-muted text-right">
     <%= time_ago_in_words(notification.created_at).upcase %>
   </div>
-  
+
   <hr>
 </div>

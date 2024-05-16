@@ -47,22 +47,34 @@
             <i class="fa-solid fa-inbox"></i>投稿一覧
           <% end %>
         </li>
+
         <li class="dropdown" onmouseover="this.querySelector('.dropdown-menu').classList.add('show')" onmouseout="this.querySelector('.dropdown-menu').classList.remove('show')">
           <button class="btn btn-outline-success dropdown-toggle rounded-pill nav-link text-light m-2 mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa-solid fa-bell"></i>通知
-            <span class="badge badge-danger"><%= current_customer.notifications.where(read: false).count %></span>
+            <span class="badge badge-danger"><%= current_customer.passive_notifications.where(checked: false).count %></span>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <% if current_customer.notifications.where(read: false).any? %>
-              <small class="dropdown-item disabled">直近10件の未読の通知を表示しています</small>
-              <% current_customer.notifications.where(read: false).limit(10).order(created_at: :desc).each do |notification| %>
+            <% if current_customer.passive_notifications.where(checked: false).any? %>
+              <small class="dropdown-item disabled">直近5件の未読の通知を表示しています</small>
+              <% current_customer.passive_notifications.where(checked: false).limit(5).each do |notification| %>
                 <%= link_to notification.message, notification_path(notification), method: :patch, class: "dropdown-item" %>
+              <% end %>
+              
+              
+              <%=  link_to notifications_path do %>
+                通知一覧へ
               <% end %>
             <% else %>
               <span class="dropdown-item disabled">未読の通知はありません</span>
+              
+              <%=  link_to notifications_path do %>
+                通知一覧へ
+              <% end %>
+              
             <% end %>
           </div>
         </li>
+
         <li>
           <%= link_to destroy_customer_session_path, method: :delete, class: 'btn btn-outline-success rounded-pill nav-link text-light m-2 mt-3' do %>
             <i class="fa-solid fa-arrow-right-from-bracket"></i>ログアウト
